@@ -26,6 +26,11 @@ function Todo(data) {
   this.project = project;
 }
 
+Todo.prototype.update = function (data) {
+  // TODO: assume data doesn't have undefined values
+  Object.assign(this, data);
+};
+
 const item = new Todo(tmpData);
 
 console.log(item);

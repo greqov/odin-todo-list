@@ -13,6 +13,9 @@
   - [ ] TODO item
     - [x] add object constructor/class
     - [ ] add item's methods
+      - [x] update
+      - [ ] push to project
+      - [ ] delete
     - [x] generate random ids
     - [ ] add demo data
     - [ ] create todo objects from JSON data
@@ -30,6 +33,8 @@
     - [ ] save data
     - [ ] load data
     - [ ] update data
+  - [ ] add inputs validation
+    - [ ] strip user inputs
 - [ ] UI
   - [ ] create sane UI
     - [ ] add modals
