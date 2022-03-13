@@ -7,9 +7,7 @@ function Project(data) {
   this.todos = [];
 }
 
-Project.prototype.addTodo = function (todo_) {
-  const todo = todo_;
-  todo.project = this.title;
+Project.prototype.addTodo = function (todo) {
   this.todos.push(todo);
 };
 
