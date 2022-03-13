@@ -1,6 +1,10 @@
+import ProjectsManager from './ProjectsManager';
 import Project from './Project';
 import Todo from './Todo';
 import '../css/styles.css';
+
+const projectsManager = new ProjectsManager();
+console.log(projectsManager);
 
 const tmpData = {
   id: 0,
@@ -17,3 +21,6 @@ console.log(inboxProject);
 
 inboxProject.addTodo(item);
 console.log(inboxProject);
+
+projectsManager.addProject(inboxProject);
+console.log(projectsManager.projects);
