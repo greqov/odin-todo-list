@@ -1,3 +1,4 @@
+import Project from './Project';
 import Todo from './Todo';
 import '../css/styles.css';
 
@@ -10,5 +11,10 @@ const tmpData = {
 };
 
 const item = new Todo(tmpData);
-
 console.log(item);
+
+const inboxProject = new Project({ title: 'Inbox' });
+console.log(inboxProject);
+
+inboxProject.addTodo(item);
+console.log(inboxProject);
