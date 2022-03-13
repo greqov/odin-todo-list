@@ -15,15 +15,14 @@ Project.prototype.removeTodo = function (todo) {
   this.todos = this.todos.filter(({ id }) => id !== todo.id);
 };
 
-// TODO: move to Project Manager?
-Project.prototype.rename = function (title) {
-  this.title = title;
+Project.prototype.moveTodo = function (todo, project) {
+  this.removeTodo(todo);
+  project.addTodo(todo);
 };
 
 // TODO: move to Project Manager?
-Project.prototype.delete = function () {
-  // TODO: add 'delete project' method
-  console.log('Delete project action');
+Project.prototype.rename = function (title) {
+  this.title = title;
 };
 
 export default Project;

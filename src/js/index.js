@@ -21,5 +21,7 @@ const archiveProject = new Project({ title: 'Archive' });
 
 projectsManager.addProject(inboxProject);
 projectsManager.addProject(archiveProject);
-projectsManager.moveTodoToProject(item, inboxProject, archiveProject);
+
+inboxProject.moveTodo(item, archiveProject);
+
 console.log(projectsManager);
