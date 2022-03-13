@@ -11,12 +11,15 @@
 
 - [ ] CORE
   - [ ] TODO item
-    - [ ] add object constructor/class
+    - [x] add object constructor/class
+    - [ ] add item's methods
+    - [ ] generate random ids
     - [ ] add demo data
     - [ ] create todo objects from JSON data
     - [ ] link todo item to project
     - [ ] update item properties
-    - [ ] change project feature
+    - [ ] handle dates with _date-fns_
+    - [ ] add 'change project' feature
   - [ ] PROJECT
     - [ ] create/read/update/delete
     - [ ] set default project
@@ -36,6 +39,7 @@
   - [ ] add filter by date, priority, etc.
   - [ ] add search field
 - [ ] OTHER
+  - [ ] rewrite to ES classes?
   - [ ] add content 'Features' section
   - [ ] refactor code
   - [ ] update README
