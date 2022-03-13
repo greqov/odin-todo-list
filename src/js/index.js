@@ -4,7 +4,6 @@ import Todo from './Todo';
 import '../css/styles.css';
 
 const projectsManager = new ProjectsManager();
-console.log(projectsManager);
 
 const tmpData = {
   id: 0,
@@ -14,13 +13,13 @@ const tmpData = {
 };
 
 const item = new Todo(tmpData);
-console.log(item);
 
 const inboxProject = new Project({ title: 'Inbox' });
-console.log(inboxProject);
-
 inboxProject.addTodo(item);
-console.log(inboxProject);
+
+const archiveProject = new Project({ title: 'Archive' });
 
 projectsManager.addProject(inboxProject);
-console.log(projectsManager.projects);
+projectsManager.addProject(archiveProject);
+projectsManager.moveTodoToProject(item, inboxProject, archiveProject);
+console.log(projectsManager);
