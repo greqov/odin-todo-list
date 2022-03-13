@@ -1,3 +1,4 @@
+import generateId from './js/utils/id';
 import './css/styles.css';
 
 const tmpData = {
@@ -8,9 +9,17 @@ const tmpData = {
   project: 'Odin',
 };
 
+// TODO: not sure about passing id
 function Todo(data) {
-  const { title = 'Untitled', dueDate = new Date(), priority = 'low', project = 'Inbox' } = data;
-  this.id = 0;
+  const {
+    id = generateId(),
+    title = 'Untitled',
+    dueDate = new Date(),
+    priority = 'low',
+    project = 'Inbox',
+  } = data;
+
+  this.id = id;
   this.title = title;
   this.dueDate = dueDate;
   this.priority = priority;

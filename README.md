@@ -13,7 +13,7 @@
   - [ ] TODO item
     - [x] add object constructor/class
     - [ ] add item's methods
-    - [ ] generate random ids
+    - [x] generate random ids
     - [ ] add demo data
     - [ ] create todo objects from JSON data
     - [ ] link todo item to project
@@ -39,6 +39,7 @@
   - [ ] add filter by date, priority, etc.
   - [ ] add search field
 - [ ] OTHER
+  - [ ] check TODOs in code
   - [ ] rewrite to ES classes?
   - [ ] add content 'Features' section
   - [ ] refactor code
