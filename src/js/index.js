@@ -1,7 +1,5 @@
-import Todo from './js/Todo';
-import './css/styles.css';
-
-// TODO: move index.js inside src/js?
+import Todo from './Todo';
+import '../css/styles.css';
 
 const tmpData = {
   id: 0,
