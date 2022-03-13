@@ -1,5 +1,7 @@
-import generateId from './js/utils/id';
+import Todo from './js/Todo';
 import './css/styles.css';
+
+// TODO: move index.js inside src/js?
 
 const tmpData = {
   id: 0,
@@ -7,28 +9,6 @@ const tmpData = {
   dueDate: '2022-02-10',
   priority: 'low',
   project: 'Odin',
-};
-
-// TODO: not sure about passing id
-function Todo(data) {
-  const {
-    id = generateId(),
-    title = 'Untitled',
-    dueDate = new Date(),
-    priority = 'low',
-    project = 'Inbox',
-  } = data;
-
-  this.id = id;
-  this.title = title;
-  this.dueDate = dueDate;
-  this.priority = priority;
-  this.project = project;
-}
-
-Todo.prototype.update = function (data) {
-  // TODO: assume data doesn't have undefined values
-  Object.assign(this, data);
 };
 
 const item = new Todo(tmpData);
