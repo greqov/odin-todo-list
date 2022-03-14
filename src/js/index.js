@@ -4,8 +4,13 @@ import Project from './Project';
 import Todo from './Todo';
 import '../css/styles.css';
 
-localStorage.clear();
-const storage = new LocStorage();
+(function initStorage() {
+  localStorage.clear();
+  const storage = new LocStorage();
+  // TODO: is it a good idea?
+  Project.prototype.storage = storage;
+  ProjectsManager.prototype.storage = storage;
+})();
 
 const projectsManager = new ProjectsManager();
 
@@ -33,28 +38,23 @@ const tmpData = {
   priority: 'low',
 };
 
+// TODO: auto add todo to project on create
 const tmpTodoItem = new Todo(tmpData);
 
 const inboxProject = new Project({ title: 'Inbox' });
+// TODO: save project immediately?
 
 demoTodosData.forEach((i) => {
   const todo = new Todo(i);
   inboxProject.addTodo(todo);
-  storage.save(todo);
 });
 
 const archiveProject = new Project({ title: 'Archive' });
 
 archiveProject.addTodo(tmpTodoItem);
-storage.save(tmpTodoItem);
 
 projectsManager.addProject(inboxProject);
 projectsManager.addProject(archiveProject);
-
-// TODO: inboxProject.moveTodo(item, archiveProject);
-storage.save(inboxProject);
-storage.save(archiveProject);
-storage.save(projectsManager);
 
 console.log(projectsManager);
 console.log(inboxProject);
