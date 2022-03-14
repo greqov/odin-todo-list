@@ -12,22 +12,21 @@
 - [ ] CORE
   - [ ] TODO item
     - [x] add object constructor/class
-    - [ ] add item's methods
+    - [x] add item's methods
       - [x] update
-      - [ ] push to project
-      - [ ] delete
+      - [x] push to project
+      - [x] delete
     - [x] generate random ids
     - [ ] add demo data
     - [ ] create todo objects from JSON data
-    - [ ] link todo item to project
-    - [ ] update item properties
+    - [x] update item properties
     - [ ] handle dates with _date-fns_
-    - [ ] add 'change project' feature
+    - [x] add 'change project' feature
   - [ ] PROJECT
-    - [ ] create/read/update/delete
+    - [x] create/read/update/delete
     - [ ] set default project
-    - [ ] link items to project
-    - [ ] update/delete todos on deleting project
+    - [x] link items to project
+    - [x] update/delete todos on deleting project
     - [ ] display on UI
   - [ ] LOCAL STORAGE
     - [ ] save data
@@ -37,6 +36,7 @@
     - [ ] strip user inputs
 - [ ] UI
   - [ ] create sane UI
+    - [ ] set default value in datepicker
     - [ ] add modals
   - [ ] style UI
     - [ ] add normalize/sanitize css
