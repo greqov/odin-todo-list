@@ -8,11 +8,12 @@ function Project(data) {
 }
 
 Project.prototype.addTodo = function (todo) {
-  this.todos.push(todo);
+  this.todos.push(todo.id);
+  // TODO: save project to local storage
 };
 
 Project.prototype.removeTodo = function (todo) {
-  this.todos = this.todos.filter(({ id }) => id !== todo.id);
+  this.todos = this.todos.filter((i) => i !== todo.id);
 };
 
 Project.prototype.moveTodo = function (todo, project) {

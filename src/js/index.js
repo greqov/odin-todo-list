@@ -9,30 +9,53 @@ const storage = new LocStorage();
 
 const projectsManager = new ProjectsManager();
 
+const demoTodosData = [
+  {
+    title: 'The body is Round',
+    dueDate: '2022-02-03',
+    priority: 'middle',
+  },
+  {
+    title: 'Squash that cat',
+    dueDate: '2022-02-08',
+    priority: 'middle',
+  },
+  {
+    title: 'Look at this gentelman',
+    dueDate: '2022-02-01',
+    priority: 'high',
+  },
+];
+
 const tmpData = {
-  id: 0,
   title: 'The body is ROUND',
   dueDate: '2022-02-10',
   priority: 'low',
 };
 
-const item = new Todo(tmpData);
-console.log('brand new todo', item);
-console.log('check for methods', item.update);
-
-storage.save('todoha', item);
-const a = storage.get('todoha');
-console.log('todoha', a);
-console.log('check for methods', a.update);
+const tmpTodoItem = new Todo(tmpData);
 
 const inboxProject = new Project({ title: 'Inbox' });
-inboxProject.addTodo(item);
+
+demoTodosData.forEach((i) => {
+  const todo = new Todo(i);
+  inboxProject.addTodo(todo);
+  storage.save(todo);
+});
 
 const archiveProject = new Project({ title: 'Archive' });
+
+archiveProject.addTodo(tmpTodoItem);
+storage.save(tmpTodoItem);
 
 projectsManager.addProject(inboxProject);
 projectsManager.addProject(archiveProject);
 
-inboxProject.moveTodo(item, archiveProject);
+// TODO: inboxProject.moveTodo(item, archiveProject);
+storage.save(inboxProject);
+storage.save(archiveProject);
+storage.save(projectsManager);
 
 console.log(projectsManager);
+console.log(inboxProject);
+console.log(archiveProject);

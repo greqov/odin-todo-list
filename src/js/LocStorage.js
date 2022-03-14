@@ -4,8 +4,10 @@ function LocStorage() {
   //
 }
 
-LocStorage.prototype.save = function (title, obj) {
-  localStorage.setItem(title, JSON.stringify(obj));
+LocStorage.prototype.save = function (obj) {
+  const label = obj.constructor.name;
+  const id = obj.id || '';
+  localStorage.setItem(`${label}_${id}`, JSON.stringify(obj));
 };
 
 LocStorage.prototype.get = function (key) {
