@@ -17,6 +17,11 @@ LocStorage.prototype.get = function (key) {
   return new Todo(restored);
 };
 
+LocStorage.prototype.remove = function (obj) {
+  const key = `${obj.constructor.name}_${obj.id}`;
+  localStorage.removeItem(key);
+};
+
 // TODO: is it better to save manager, projects, todos separately?
 
 export default LocStorage;
