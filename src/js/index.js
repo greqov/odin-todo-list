@@ -1,7 +1,11 @@
+import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
 import Todo from './Todo';
 import '../css/styles.css';
+
+localStorage.clear();
+const storage = new LocStorage();
 
 const projectsManager = new ProjectsManager();
 
@@ -13,6 +17,13 @@ const tmpData = {
 };
 
 const item = new Todo(tmpData);
+console.log('brand new todo', item);
+console.log('check for methods', item.update);
+
+storage.save('todoha', item);
+const a = storage.get('todoha');
+console.log('todoha', a);
+console.log('check for methods', a.update);
 
 const inboxProject = new Project({ title: 'Inbox' });
 inboxProject.addTodo(item);
