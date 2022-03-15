@@ -1,3 +1,4 @@
+import Todo from './Todo';
 import generateId from './utils/id';
 
 function Project(data) {
@@ -32,6 +33,12 @@ Project.prototype.rename = function (title) {
 
 Project.prototype.save = function () {
   this.storage.save(this);
+};
+
+Project.prototype.loadData = function (json) {
+  json.forEach((item) => {
+    this.addTodo(new Todo(item));
+  });
 };
 
 export default Project;
