@@ -1,5 +1,7 @@
 function ProjectsManager() {
   this.projects = [];
+  this.defaultProject = null;
+  this.currentProject = null;
 }
 
 ProjectsManager.prototype.addProject = function (project) {
@@ -17,7 +19,5 @@ ProjectsManager.prototype.deleteProject = function (project) {
 ProjectsManager.prototype.save = function () {
   this.storage.save(this);
 };
-
-// add currentProject property?
 
 export default ProjectsManager;
