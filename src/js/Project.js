@@ -2,8 +2,9 @@ import Todo from './Todo';
 import generateId from './utils/id';
 
 function Project(data) {
-  const { title = 'Untitled' } = data;
-  this.id = generateId();
+  // TODO: do I need to add todos param?
+  const { id = generateId(), title = 'Untitled' } = data;
+  this.id = id;
   this.title = title;
   this.todos = [];
 }
@@ -23,7 +24,7 @@ Project.prototype.addTodo = function (todo_) {
 
 Project.prototype.removeTodo = function (todo) {
   this.todos = this.todos.filter((i) => i !== todo.id);
-  this.storage.remove(todo);
+  this.storage.remove(`Todo_${todo.id}`);
   this.save();
 };
 

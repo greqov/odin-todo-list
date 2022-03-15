@@ -4,16 +4,24 @@ function ProjectsManager() {
   this.currentProject = null;
 }
 
-ProjectsManager.prototype.addProject = function (project) {
-  this.projects.push(project.id);
+ProjectsManager.prototype.addProject = function (id) {
+  this.projects.push(id);
   this.save();
 };
 
 // TODO: add warning about deleting {n} todo items
-ProjectsManager.prototype.deleteProject = function (project) {
-  this.projects = this.projects.filter(({ id }) => id !== project.id);
+ProjectsManager.prototype.deleteProject = function (id) {
+  if (this.defaultProject === id) {
+    console.warn('WARNING: Cannot delete default project');
+    return;
+  }
+
+  // TODO: update this.currentProject on deleteting current project.
+
+  this.projects = this.projects.filter((i) => i !== id);
   this.save();
-  // TODO: delete from localStorage too
+
+  this.storage.removeProject(`Project_${id}`);
 };
 
 ProjectsManager.prototype.save = function () {

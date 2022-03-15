@@ -23,7 +23,7 @@ function initProjectsManager() {
   defautProject.save();
   projectsManager.defaultProject = defautProject.id;
   projectsManager.currentProject = defautProject.id;
-  projectsManager.addProject(defautProject);
+  projectsManager.addProject(defautProject.id);
   // ? add fn to populate storage
   defautProject.loadData(demoTodosData);
   // ? check localStorage for data, if so get it!
@@ -41,8 +41,4 @@ const projectsManager = initProjectsManager();
 
 const archiveProject = new Project({ title: 'Archive' });
 archiveProject.loadData(archiveTodosData);
-// archiveProject.addTodo({ priority: 'top' });
-// archiveProject.loadData({});
-projectsManager.addProject(archiveProject);
-
-console.log(projectsManager);
+projectsManager.addProject(archiveProject.id);

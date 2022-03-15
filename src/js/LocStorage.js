@@ -1,5 +1,3 @@
-import Todo from './Todo';
-
 function LocStorage() {
   //
 }
@@ -11,15 +9,16 @@ LocStorage.prototype.save = function (obj) {
 };
 
 LocStorage.prototype.get = function (key) {
-  const restored = JSON.parse(localStorage.getItem(key));
-
-  // TODO: which constuctor should we use?
-  return new Todo(restored);
+  return JSON.parse(localStorage.getItem(key));
 };
 
-LocStorage.prototype.remove = function (obj) {
-  const key = `${obj.constructor.name}_${obj.id}`;
+LocStorage.prototype.remove = function (key) {
   localStorage.removeItem(key);
+};
+
+LocStorage.prototype.removeProject = function (key) {
+  const keys = this.get(key).todos.map((id) => `Todo_${id}`);
+  [...keys, key].forEach((k) => this.remove(k));
 };
 
 // TODO: is it better to save manager, projects, todos separately?
