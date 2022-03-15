@@ -8,7 +8,13 @@ function Project(data) {
   this.todos = [];
 }
 
-Project.prototype.addTodo = function (todo) {
+Project.prototype.addTodo = function (todo_) {
+  // TODO: do something with param reassignment
+  let todo = todo_;
+  // TODO: not sure about need of check for 'Todo' object
+  if (!(todo instanceof Todo)) {
+    todo = new Todo(todo);
+  }
   this.todos.push(todo.id);
   // NOTE: need to add storage obj to proto!
   this.storage.save(todo);
@@ -36,9 +42,16 @@ Project.prototype.save = function () {
 };
 
 Project.prototype.loadData = function (json) {
-  json.forEach((item) => {
-    this.addTodo(new Todo(item));
-  });
+  // TODO: do I need this check?
+  // TODO: actually can handle array/object cases with
+  // console.log(json.constructor.name) or json instanceof Array;
+  try {
+    json.forEach((item) => {
+      this.addTodo(new Todo(item));
+    });
+  } catch (err) {
+    console.warn('WARNING! Require an array of objects\n', err);
+  }
 };
 
 export default Project;
