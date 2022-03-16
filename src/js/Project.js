@@ -3,7 +3,13 @@ import generateId from './utils/id';
 
 function Project(data) {
   // TODO: do I need to add todos param?
-  const { id = generateId(), title = 'Untitled' } = data;
+  const { id = generateId(), title: t } = data;
+
+  let title = t.trim().replace(/[<>/]/gi, '');
+  if (title === '') {
+    title = 'Untitled';
+  }
+
   this.id = id;
   this.title = title;
   this.todos = [];
