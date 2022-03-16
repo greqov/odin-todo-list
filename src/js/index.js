@@ -2,10 +2,13 @@ import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
 // import Todo from './Todo';
+import ui from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
 import '../css/styles.css';
+
+console.log(ui);
 
 function initStorage() {
   // TODO: remove clear on load
