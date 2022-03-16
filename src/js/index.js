@@ -54,9 +54,10 @@ projectsManager.projects.forEach((id) => {
 });
 
 // TODO: maybe add more precise dom node, not document?
-document.addEventListener('click', (e) => {
+document.addEventListener('submit', (e) => {
+  console.log('submit action');
   const { target } = e;
-  if (target.classList.contains('js-btn-submit-project')) {
+  if (target.classList.contains('js-form-add-project')) {
     e.preventDefault();
     // TODO: use form submit? not button click?
     const form = document.querySelector('.js-form-add-project');
