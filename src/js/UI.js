@@ -9,10 +9,10 @@ UI.prototype.init = function () {
 };
 
 UI.prototype.renderProject = function (id) {
-  const projectsListEl = document.querySelector('.js-projects-list');
+  const container = document.querySelector('.js-projects-list');
   const { title } = this.storage.get(`Project_${id}`);
   // TODO: get id, title
-  const projectTemplate = `
+  const template = `
     <div id="Project_${id}">
       <span>${title}</span>
       <button type="button">edit</button>
@@ -20,7 +20,7 @@ UI.prototype.renderProject = function (id) {
     </div>`;
   // TODO: show todos count?
 
-  projectsListEl.insertAdjacentHTML('beforeend', projectTemplate);
+  container.insertAdjacentHTML('beforeend', template);
 };
 
 UI.prototype.renderTodo = function (id) {
