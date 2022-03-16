@@ -8,6 +8,7 @@ import archiveTodosData from './data/archiveTodos.json';
 import '../css/styles.css';
 
 function initStorage() {
+  // TODO: remove clear on load
   localStorage.clear();
   const storage = new LocStorage();
   // TODO: is it a good idea?
@@ -21,9 +22,10 @@ function initProjectsManager() {
   // create default project, push it to manager
   const defautProject = new Project({ title: 'Inbox' });
   defautProject.save();
-  projectsManager.defaultProject = defautProject.id;
-  projectsManager.currentProject = defautProject.id;
-  projectsManager.addProject(defautProject.id);
+  const { id } = defautProject;
+  projectsManager.defaultProject = id;
+  projectsManager.currentProject = id;
+  projectsManager.addProject(id);
   // ? add fn to populate storage
   defautProject.loadData(demoTodosData);
   // ? check localStorage for data, if so get it!
