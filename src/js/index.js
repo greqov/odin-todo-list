@@ -1,27 +1,46 @@
+import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
-import Todo from './Todo';
+// import Todo from './Todo';
+import demoTodosData from './data/demoTodos.json';
+import archiveTodosData from './data/archiveTodos.json';
+
 import '../css/styles.css';
 
-const projectsManager = new ProjectsManager();
+function initStorage() {
+  // TODO: remove clear on load
+  localStorage.clear();
+  const storage = new LocStorage();
+  // TODO: is it a good idea?
+  Project.prototype.storage = storage;
+  ProjectsManager.prototype.storage = storage;
+}
 
-const tmpData = {
-  id: 0,
-  title: 'The body is ROUND',
-  dueDate: '2022-02-10',
-  priority: 'low',
-};
+function initProjectsManager() {
+  // create projectsManager
+  const projectsManager = new ProjectsManager();
+  // create default project, push it to manager
+  const defautProject = new Project({ title: 'Inbox' });
+  defautProject.save();
+  const { id } = defautProject;
+  projectsManager.defaultProject = id;
+  projectsManager.currentProject = id;
+  projectsManager.addProject(id);
+  // ? add fn to populate storage
+  defautProject.loadData(demoTodosData);
+  // ? check localStorage for data, if so get it!
+  return projectsManager;
+}
 
-const item = new Todo(tmpData);
+// TODO: on add todo check is there any project (create default one then!)
+// TODO: create sane init() fn?
 
-const inboxProject = new Project({ title: 'Inbox' });
-inboxProject.addTodo(item);
+initStorage();
+const projectsManager = initProjectsManager();
+
+// TODO: auto add todo to project on create
+// TODO: save project immediately after creation?
 
 const archiveProject = new Project({ title: 'Archive' });
-
-projectsManager.addProject(inboxProject);
-projectsManager.addProject(archiveProject);
-
-inboxProject.moveTodo(item, archiveProject);
-
-console.log(projectsManager);
+archiveProject.loadData(archiveTodosData);
+projectsManager.addProject(archiveProject.id);
