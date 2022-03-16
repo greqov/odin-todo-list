@@ -1,20 +1,15 @@
 import generateId from './utils/id';
+import trimStr from './utils/trimStr';
 
 // TODO: not sure about passing id
 function Todo(data) {
-  const {
-    id = generateId(),
-    title = 'Untitled',
-    dueDate = new Date(),
-    priority = 'low',
-    complete = false,
-  } = data;
+  const { id, title, dueDate, priority = 'low', complete } = data;
 
-  this.id = id;
-  this.title = title;
-  this.dueDate = dueDate;
+  this.id = id || generateId();
+  this.title = trimStr(title);
+  this.dueDate = dueDate || new Date();
   this.priority = priority;
-  this.complete = complete;
+  this.complete = complete === 'on';
 }
 
 // TODO: add save (to storage) method too?
