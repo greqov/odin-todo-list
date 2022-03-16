@@ -1,17 +1,13 @@
 import Todo from './Todo';
 import generateId from './utils/id';
+import trimStr from './utils/trimStr';
 
 function Project(data) {
   // TODO: do I need to add todos param?
-  const { id = generateId(), title: t } = data;
-
-  let title = t.trim().replace(/[<>/]/gi, '');
-  if (title === '') {
-    title = 'Untitled';
-  }
+  const { id = generateId(), title } = data;
 
   this.id = id;
-  this.title = title;
+  this.title = trimStr(title);
   this.todos = [];
 }
 
