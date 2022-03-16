@@ -2,13 +2,11 @@ import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
 // import Todo from './Todo';
-import ui from './UI';
+import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
 import '../css/styles.css';
-
-console.log(ui);
 
 function initStorage() {
   // TODO: remove clear on load
@@ -17,6 +15,7 @@ function initStorage() {
   // TODO: is it a good idea?
   Project.prototype.storage = storage;
   ProjectsManager.prototype.storage = storage;
+  return storage;
 }
 
 function initProjectsManager() {
@@ -38,8 +37,10 @@ function initProjectsManager() {
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
 
-initStorage();
+const storage = initStorage();
 const projectsManager = initProjectsManager();
+const ui = new UI(projectsManager, storage);
+console.log(ui.pm.storage);
 
 // TODO: auto add todo to project on create
 // TODO: save project immediately after creation?
@@ -47,3 +48,24 @@ const projectsManager = initProjectsManager();
 const archiveProject = new Project({ title: 'Archive' });
 archiveProject.loadData(archiveTodosData);
 projectsManager.addProject(archiveProject.id);
+
+projectsManager.projects.forEach((id) => {
+  ui.renderProject(id);
+});
+
+// TODO: maybe add more precise dom node, not document?
+document.addEventListener('click', (e) => {
+  const { target } = e;
+  if (target.classList.contains('js-btn-submit-project')) {
+    e.preventDefault();
+    // TODO: use form submit? not button click?
+    const form = document.querySelector('.js-form-add-project');
+    const data = Object.fromEntries(new FormData(form).entries());
+    const project = new Project(data);
+    project.save();
+    console.log(project);
+    form.reset();
+    ui.renderProject(project.id);
+    projectsManager.addProject(project.id);
+  }
+});
