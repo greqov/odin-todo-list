@@ -21,6 +21,10 @@ LocStorage.prototype.removeProject = function (key) {
   [...keys, key].forEach((k) => this.remove(k));
 };
 
+LocStorage.prototype.isEmpty = function () {
+  return localStorage.length === 0;
+};
+
 // TODO: is it better to save manager, projects, todos separately?
 
 export default LocStorage;
