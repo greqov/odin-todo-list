@@ -1,5 +1,3 @@
-import Todo from './Todo';
-
 function UI(pm, storage) {
   // TODO: maybe better pass storage? Do I need pm?
   this.pm = pm; // damn!
@@ -24,16 +22,5 @@ UI.prototype.renderProject = function (id) {
 
   projectsListEl.insertAdjacentHTML('beforeend', projectTemplate);
 };
-
-const todoForm = document.querySelector('.js-form-add-todo');
-todoForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(this).entries());
-  const todo = new Todo(data);
-  console.log(todo);
-  // TODO: render todo card
-  // TODO: add todo to project
-  // TODO: save to localStorage
-});
 
 export default UI;

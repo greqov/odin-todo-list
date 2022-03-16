@@ -1,7 +1,7 @@
 import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
-// import Todo from './Todo';
+import Todo from './Todo';
 import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
@@ -57,10 +57,11 @@ projectsManager.projects.forEach((id) => {
 document.addEventListener('submit', (e) => {
   console.log('submit action');
   const { target } = e;
+
   if (target.classList.contains('js-form-add-project')) {
     e.preventDefault();
     // TODO: use form submit? not button click?
-    const form = document.querySelector('.js-form-add-project');
+    const form = target;
     const data = Object.fromEntries(new FormData(form).entries());
     const project = new Project(data);
     project.save();
@@ -68,5 +69,18 @@ document.addEventListener('submit', (e) => {
     form.reset();
     ui.renderProject(project.id);
     projectsManager.addProject(project.id);
+    return;
+  }
+
+  if (target.classList.contains('js-form-add-todo')) {
+    e.preventDefault();
+    const form = target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const todo = new Todo(data);
+    console.log(todo);
+    form.reset();
+    // TODO: render todo card
+    // TODO: add todo to project
+    // TODO: save to localStorage
   }
 });
