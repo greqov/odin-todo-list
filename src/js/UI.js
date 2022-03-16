@@ -23,4 +23,18 @@ UI.prototype.renderProject = function (id) {
   projectsListEl.insertAdjacentHTML('beforeend', projectTemplate);
 };
 
+UI.prototype.renderTodo = function (id) {
+  const container = document.querySelector('.js-todo-list');
+  const { title, dueDate, priority, complete } = this.storage.get(`Todo_${id}`);
+  const template = `
+    <div id="Todo_${id}" style="border-bottom: 1px solid;">
+      <div>${title}</div>
+      <div>${dueDate}</div>
+      <div>priority: ${priority}</div>
+      <div>complete: ${complete}</div>
+    </div>
+  `;
+  container.insertAdjacentHTML('beforeend', template);
+};
+
 export default UI;
