@@ -4,13 +4,14 @@ import trimStr from './utils/trimStr';
 
 function Project(data) {
   // TODO: do I need to add todos param?
-  const { id = generateId(), title } = data;
+  const { id = generateId(), title, todos } = data;
 
   this.id = id;
   this.title = trimStr(title);
-  this.todos = [];
+  this.todos = todos || [];
 }
 
+// TODO: it's not clear is it a Todo item or {}
 Project.prototype.addTodo = function (todo_) {
   // TODO: do something with param reassignment
   let todo = todo_;
@@ -22,6 +23,8 @@ Project.prototype.addTodo = function (todo_) {
   // NOTE: need to add storage obj to proto!
   this.storage.save(todo);
   this.save();
+
+  return todo.id;
 };
 
 Project.prototype.removeTodo = function (todo) {
