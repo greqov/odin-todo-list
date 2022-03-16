@@ -76,11 +76,14 @@ document.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = target;
     const data = Object.fromEntries(new FormData(form).entries());
-    const todo = new Todo(data);
-    console.log(todo);
     form.reset();
-    // TODO: render todo card
     // TODO: add todo to project
-    // TODO: save to localStorage
+    const projectId = projectsManager.currentProject;
+    // FFFFFUUUU: we need project object here :3
+    // TODO: add Project.prototype.restore() ?
+    const project = new Project(storage.get(`Project_${projectId}`));
+    const id = project.addTodo(data);
+    // TODO: avoid shaking storage 2 times! (on save, on render)
+    ui.renderTodo(id);
   }
 });
