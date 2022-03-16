@@ -6,5 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Template</title>
   </head>
-  <body></body>
+  <body>
+    <h2>Projects</h2>
+    <div>projects list</div>
+    <button class="js-btn-add-project" type="button">Add project</button>
+
+    <form class="js-form-add-project" action="#">
+      <input type="text" name="title" placeholder="Project title" autofocus />
+      <button class="js-btn-calcel-form" type="button">Cancel</button>
+      <button class="js-btn-submit-project" type="submit">Add project</button>
+    </form>
+
+    <h2>TODOs</h2>
+    <div>todos list</div>
+    <button class="js-btn-add-todo" type="button">Add todo</button>
+    <form class="js-form-add-todo" action="#">
+      <input type="text" name="title" placeholder="Title" autofocus />
+      <input type="date" name="dueDate" />
+      <select name="priority">
+        <option value="low">Low</option>
+        <option value="middle">Middle</option>
+        <option value="high">High</option>
+      </select>
+      <div>
+        <input type="checkbox" name="complete" id="todoComplete" />
+        <label for="todoComplete">complete?</label>
+      </div>
+      <button type="button">Cancel</button>
+      <button type="submit">Add/Update todo</button>
+    </form>
+
+    <footer>footer</footer>
+  </body>
 </html>
