@@ -4,9 +4,9 @@ import trimStr from './utils/trimStr';
 
 function Project(data) {
   // TODO: do I need to add todos param?
-  const { id = generateId(), title, todos } = data;
+  const { id, title, todos } = data;
 
-  this.id = id;
+  this.id = id || generateId();
   this.title = trimStr(title);
   this.todos = todos || [];
 }
@@ -44,8 +44,8 @@ Project.prototype.moveTodo = function (todo, project) {
   project.addTodo(todo);
 };
 
-Project.prototype.rename = function (title) {
-  this.title = title;
+Project.prototype.update = function (data) {
+  Object.assign(this, data);
   this.save();
 };
 
