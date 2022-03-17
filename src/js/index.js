@@ -48,22 +48,34 @@ projectsManager.projects.forEach((id) => {
   ui.renderProject(id);
 });
 
+function submitProjectForm(e) {
+  e.preventDefault();
+  let project = {};
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  // NOTE: update OR create action
+  if (data.id) {
+    project = projectsManager.getRestoredProject(data.id);
+    project.update(data);
+  } else {
+    project = new Project(data);
+    projectsManager.addProject(project.id);
+  }
+
+  project.save();
+  form.reset();
+  form.querySelector('[name="id"]').value = '';
+  ui.renderProject(project.id);
+}
+
 // TODO: maybe add more precise dom node, not document?
 document.addEventListener('submit', (e) => {
   console.log('submit action');
   const { target } = e;
 
   if (target.classList.contains('js-form-add-project')) {
-    e.preventDefault();
-    // TODO: use form submit? not button click?
-    const form = target;
-    const data = Object.fromEntries(new FormData(form).entries());
-    const project = new Project(data);
-    project.save();
-    console.log(project);
-    form.reset();
-    ui.renderProject(project.id);
-    projectsManager.addProject(project.id);
+    submitProjectForm(e);
     return;
   }
 
@@ -88,7 +100,7 @@ todoList.addEventListener('click', (e) => {
     console.log('do delete action');
     const todoEl = target.closest('.js-todo-item');
     // 1. get todo id
-    const todoId = todoEl.id.split('_')[1];
+    const todoId = todoEl.id;
     // 2. get project (hint: current project)
     const projectId = ui.pm.currentProject;
     const project = ui.pm.getRestoredProject(projectId);
@@ -107,12 +119,21 @@ projectsList.addEventListener('click', (e) => {
   if (target.classList.contains('js-btn-project-delete')) {
     console.log('do delete project action!');
     const projectEl = target.closest('.js-project-item');
-    const projectId = projectEl.id.split('_')[1];
+    const projectId = projectEl.id;
     // TODO: I don't like ui.pm
     ui.pm.deleteProject(projectId);
 
     if (projectId !== ui.pm.defaultProject) {
       projectEl.remove();
     }
+  } else if (target.classList.contains('js-btn-project-edit')) {
+    // 1. get project details
+    const projectId = target.closest('.js-project-item').id;
+    const data = storage.get(`Project_${projectId}`);
+    const form = document.querySelector('.js-form-add-project');
+    // TODO: add loop
+    form.querySelector('[name="title"]').value = data.title;
+    form.querySelector('[name="id"]').value = data.id;
+    // 2. TODO: show form with populated data (in modal?)
   }
 });
