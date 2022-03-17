@@ -11,11 +11,14 @@ function Project(data) {
   this.todos = todos || [];
 }
 
+Project.prototype.storage = null;
+
 // TODO: it's not clear is it a Todo item or {}
 Project.prototype.addTodo = function (todo_) {
   // TODO: do something with param reassignment
   let todo = todo_;
   // TODO: not sure about need of check for 'Todo' object
+  // use in render new todo already so be aware!
   if (!(todo instanceof Todo)) {
     todo = new Todo(todo);
   }
@@ -33,6 +36,7 @@ Project.prototype.removeTodo = function (todo) {
   this.save();
 };
 
+// TODO: maybe avoid removing todo from storage?
 Project.prototype.moveTodo = function (todo, project) {
   this.removeTodo(todo);
   project.addTodo(todo);

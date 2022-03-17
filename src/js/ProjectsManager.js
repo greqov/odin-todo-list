@@ -4,6 +4,8 @@ function ProjectsManager() {
   this.currentProject = null;
 }
 
+ProjectsManager.prototype.storage = null;
+
 ProjectsManager.prototype.addProject = function (id) {
   this.projects.push(id);
   this.save();
