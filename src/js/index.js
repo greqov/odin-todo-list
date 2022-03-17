@@ -100,3 +100,19 @@ todoList.addEventListener('click', (e) => {
     console.log('do edit action');
   }
 });
+
+const projectsList = document.querySelector('.js-projects-list');
+projectsList.addEventListener('click', (e) => {
+  const { target } = e;
+  if (target.classList.contains('js-btn-project-delete')) {
+    console.log('do delete project action!');
+    const projectEl = target.closest('.js-project-item');
+    const projectId = projectEl.id.split('_')[1];
+    // TODO: I don't like ui.pm
+    ui.pm.deleteProject(projectId);
+
+    if (projectId !== ui.pm.defaultProject) {
+      projectEl.remove();
+    }
+  }
+});

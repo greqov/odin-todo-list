@@ -13,10 +13,10 @@ UI.prototype.renderProject = function (id) {
   const { title } = this.storage.get(`Project_${id}`);
   // TODO: get id, title
   const template = `
-    <div id="Project_${id}">
+    <div id="Project_${id}" class="js-project-item">
       <span>${title}</span>
-      <button type="button">edit</button>
-      <button type="button">delete</button>
+      <button class="js-btn-project-edit" type="button">edit</button>
+      <button class="js-btn-project-delete" type="button">delete</button>
     </div>`;
   // TODO: show todos count?
 
