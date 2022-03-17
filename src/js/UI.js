@@ -27,11 +27,15 @@ UI.prototype.renderTodo = function (id) {
   const container = document.querySelector('.js-todo-list');
   const { title, dueDate, priority, complete } = this.storage.get(`Todo_${id}`);
   const template = `
-    <div id="Todo_${id}" style="border-bottom: 1px solid;">
+    <div id="Todo_${id}" class="js-todo-item" style="border-bottom: 1px solid;">
       <div>${title}</div>
       <div>${dueDate}</div>
       <div>priority: ${priority}</div>
       <div>complete: ${complete}</div>
+      <div>
+        <button class="js-btn-todo-edit" type="button">edit</button>
+        <button class="js-btn-todo-delete" type="button">delete</button>
+      </div>
     </div>
   `;
   container.insertAdjacentHTML('beforeend', template);

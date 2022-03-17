@@ -74,11 +74,29 @@ document.addEventListener('submit', (e) => {
     form.reset();
     // TODO: add todo to project
     const projectId = projectsManager.currentProject;
-    // FFFFFUUUU: we need project object here :3
-    // TODO: add Project.prototype.restore() ?
-    const project = new Project(storage.get(`Project_${projectId}`));
-    const id = project.addTodo(data);
+    const project = ui.pm.getRestoredProject(projectId);
+    const todoId = project.addTodo(data);
     // TODO: avoid shaking storage 2 times! (on save, on render)
-    ui.renderTodo(id);
+    ui.renderTodo(todoId);
+  }
+});
+
+const todoList = document.querySelector('.js-todo-list');
+todoList.addEventListener('click', (e) => {
+  const { target } = e;
+  if (target.classList.contains('js-btn-todo-delete')) {
+    console.log('do delete action');
+    const todoEl = target.closest('.js-todo-item');
+    // 1. get todo id
+    const todoId = todoEl.id.split('_')[1];
+    // 2. get project (hint: current project)
+    const projectId = ui.pm.currentProject;
+    const project = ui.pm.getRestoredProject(projectId);
+    // 3. delete todo from project
+    project.removeTodo(todoId);
+    // 4. update UI
+    todoEl.remove();
+  } else if (target.classList.contains('js-btn-todo-edit')) {
+    console.log('do edit action');
   }
 });
