@@ -13,13 +13,22 @@ UI.prototype.renderProject = function (id) {
   const { title } = this.storage.get(`Project_${id}`);
   // TODO: get id, title
   const template = `
-    <div id="Project_${id}" class="js-project-item">
+    <div id="${id}" class="js-project-item">
       <span>${title}</span>
       <button class="js-btn-project-edit" type="button">edit</button>
       <button class="js-btn-project-delete" type="button">delete</button>
     </div>`;
   // TODO: show todos count?
 
+  try {
+    // delete old project element on 'edit/update' action
+    const oldItem = container.querySelector(`#${id}`);
+    if (oldItem !== null) oldItem.remove();
+  } catch (error) {
+    console.log(error);
+  }
+
+  // TODO: place on top maybe?
   container.insertAdjacentHTML('beforeend', template);
 };
 
@@ -27,7 +36,7 @@ UI.prototype.renderTodo = function (id) {
   const container = document.querySelector('.js-todo-list');
   const { title, dueDate, priority, complete } = this.storage.get(`Todo_${id}`);
   const template = `
-    <div id="Todo_${id}" class="js-todo-item" style="border-bottom: 1px solid;">
+    <div id="${id}" class="js-todo-item" style="border-bottom: 1px solid;">
       <div>${title}</div>
       <div>${dueDate}</div>
       <div>priority: ${priority}</div>
