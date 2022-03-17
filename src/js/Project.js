@@ -30,15 +30,17 @@ Project.prototype.addTodo = function (todo_) {
   return todo.id;
 };
 
-Project.prototype.removeTodo = function (todo) {
-  this.todos = this.todos.filter((i) => i !== todo.id);
-  this.storage.remove(`Todo_${todo.id}`);
+Project.prototype.removeTodo = function (id) {
+  this.todos = this.todos.filter((i) => i !== id);
+  this.storage.remove(`Todo_${id}`);
   this.save();
 };
 
 // TODO: maybe avoid removing todo from storage?
+// TODO: maybe pass projectId?
 Project.prototype.moveTodo = function (todo, project) {
-  this.removeTodo(todo);
+  console.warn('WARNING! .moveTodo() does not work yet!');
+  this.removeTodo(todo.id);
   project.addTodo(todo);
 };
 
