@@ -1,46 +1,41 @@
 import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
-import Todo from './Todo';
+// import Todo from './Todo';
 import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
 import '../css/styles.css';
 
-function initStorage() {
+const storage = (function initStorage() {
   // TODO: remove clear on load
   localStorage.clear();
-  const storage = new LocStorage();
+  const storageEntity = new LocStorage();
   // TODO: is it a good idea?
-  Project.prototype.storage = storage;
-  ProjectsManager.prototype.storage = storage;
-  return storage;
-}
+  Project.prototype.storage = storageEntity;
+  ProjectsManager.prototype.storage = storageEntity;
+  return storageEntity;
+})();
 
-function initProjectsManager() {
-  // create projectsManager
-  const projectsManager = new ProjectsManager();
-  // create default project, push it to manager
+const projectsManager = (function initProjectsManager() {
+  const pm = new ProjectsManager();
   const defautProject = new Project({ title: 'Inbox' });
   defautProject.save();
   const { id } = defautProject;
-  projectsManager.defaultProject = id;
-  projectsManager.currentProject = id;
-  projectsManager.addProject(id);
+  pm.defaultProject = id;
+  pm.currentProject = id;
+  pm.addProject(id);
   // ? add fn to populate storage
   defautProject.loadData(demoTodosData);
   // ? check localStorage for data, if so get it!
-  return projectsManager;
-}
+  return pm;
+})();
 
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
 
-const storage = initStorage();
-const projectsManager = initProjectsManager();
 const ui = new UI(projectsManager, storage);
-console.log(ui.pm.storage);
 
 // TODO: auto add todo to project on create
 // TODO: save project immediately after creation?
