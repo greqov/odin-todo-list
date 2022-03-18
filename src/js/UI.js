@@ -20,16 +20,14 @@ UI.prototype.renderProject = function (id) {
     </div>`;
   // TODO: show todos count?
 
-  try {
-    // delete old project element on 'edit/update' action
-    const oldItem = container.querySelector(`#${id}`);
-    if (oldItem !== null) oldItem.remove();
-  } catch (error) {
-    console.log(error);
+  // replace old project node on 'edit/update' action
+  const oldItem = container.querySelector(`#${id}`);
+  if (oldItem !== null) {
+    oldItem.insertAdjacentHTML('afterend', template);
+    oldItem.remove();
+  } else {
+    container.insertAdjacentHTML('beforeend', template);
   }
-
-  // TODO: place on top maybe?
-  container.insertAdjacentHTML('beforeend', template);
 };
 
 UI.prototype.renderTodo = function (id) {
