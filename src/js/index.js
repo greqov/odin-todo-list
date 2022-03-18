@@ -1,7 +1,7 @@
 import LocStorage from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
-// import Todo from './Todo';
+import Todo from './Todo';
 import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
@@ -13,6 +13,7 @@ const storage = (function initStorage() {
   localStorage.clear();
   const storageEntity = new LocStorage();
   // TODO: is it a good idea?
+  Todo.prototype.storage = storageEntity;
   Project.prototype.storage = storageEntity;
   ProjectsManager.prototype.storage = storageEntity;
   return storageEntity;
@@ -78,24 +79,16 @@ function submitTodoForm(e) {
   let todo;
   const form = e.target;
   const data = Object.fromEntries(new FormData(form).entries());
-  console.log('data from form:', data);
-
   const projectId = projectsManager.currentProject;
   const project = ui.pm.getRestoredProject(projectId);
 
   // NOTE: update OR create action
   if (data.id) {
-    console.log('update action');
-    todo = ui.storage.get(`Todo_${data.id}`);
-    console.log('object from storage', todo);
-    Object.assign(todo, data);
-    console.warn('TODO: update complete value!');
+    todo = project.getRestoredTodo(data.id);
+    todo.update(data);
   } else {
-    console.log('create action');
     todo = data;
   }
-
-  console.log('new object', todo);
 
   const todoId = project.addTodo(todo);
   form.reset();
@@ -107,7 +100,6 @@ function submitTodoForm(e) {
 
 // TODO: maybe add more precise dom node, not document?
 document.addEventListener('submit', (e) => {
-  console.log('submit action');
   const { target } = e;
 
   if (target.classList.contains('js-form-add-project')) {
@@ -124,7 +116,6 @@ const todoList = document.querySelector('.js-todo-list');
 todoList.addEventListener('click', (e) => {
   const { target } = e;
   if (target.classList.contains('js-btn-todo-delete')) {
-    console.log('do delete action');
     const todoEl = target.closest('.js-todo-item');
     // 1. get todo id
     const todoId = todoEl.id;
@@ -136,11 +127,9 @@ todoList.addEventListener('click', (e) => {
     // 4. update UI
     todoEl.remove();
   } else if (target.classList.contains('js-btn-todo-edit')) {
-    console.log('do edit todo action');
     // 1. get todo details from storage
     const todoId = target.closest('.js-todo-item').id;
     const data = storage.get(`Todo_${todoId}`);
-    console.log('data', data);
 
     const form = document.querySelector('.js-form-add-todo');
     // 2. populate form
@@ -149,13 +138,19 @@ todoList.addEventListener('click', (e) => {
         console.log(1, key, value);
         if (key !== 'complete') {
           form.querySelector(`[name="${key}"]`).value = value;
-        } else if (value === true) {
-          form.querySelector(`[name="${key}"]`).setAttribute('checked', true);
+        } else {
+          form.querySelector(`[name="${key}"]`).checked = value;
         }
       } catch (error) {
         console.warn(`Missing [name="${key}"] element\n`, error);
       }
     });
+  } else if (target.classList.contains('js-todo-toggle')) {
+    const todoId = target.closest('.js-todo-item').id;
+    const data = storage.get(`Todo_${todoId}`);
+    const todo = new Todo(data);
+    const complete = target.checked;
+    todo.update({ complete });
   }
 });
 
@@ -163,7 +158,6 @@ const projectsList = document.querySelector('.js-projects-list');
 projectsList.addEventListener('click', (e) => {
   const { target } = e;
   if (target.classList.contains('js-btn-project-delete')) {
-    console.log('do delete project action!');
     const projectEl = target.closest('.js-project-item');
     const projectId = projectEl.id;
     // TODO: I don't like ui.pm
