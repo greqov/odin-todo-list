@@ -33,12 +33,13 @@ UI.prototype.renderProject = function (id) {
 UI.prototype.renderTodo = function (id) {
   const container = document.querySelector('.js-todo-list');
   const { title, dueDate, priority, complete } = this.storage.get(`Todo_${id}`);
+  console.log('{complete} render', complete);
   const template = `
     <div id="${id}" class="js-todo-item" style="border-bottom: 1px solid;">
       <div>${title}</div>
       <div>${dueDate}</div>
       <div>priority: ${priority}</div>
-      <div>complete: ${complete}</div>
+      <div>complete: ${complete} <input type="checkbox" ${complete ? 'checked' : ''} /></div>
       <div>
         <button class="js-btn-todo-edit" type="button">edit</button>
         <button class="js-btn-todo-delete" type="button">delete</button>

@@ -44,6 +44,10 @@ const archiveProject = new Project({ title: 'Archive' });
 archiveProject.loadData(archiveTodosData);
 projectsManager.addProject(archiveProject.id);
 
+archiveProject.todos.forEach((id) => {
+  ui.renderTodo(id);
+});
+
 projectsManager.projects.forEach((id) => {
   ui.renderProject(id);
 });
@@ -83,15 +87,20 @@ function submitTodoForm(e) {
   if (data.id) {
     console.log('update action');
     todo = ui.storage.get(`Todo_${data.id}`);
+    console.log('object from storage', todo);
     Object.assign(todo, data);
+    console.warn('TODO: update complete value!');
   } else {
     console.log('create action');
     todo = data;
   }
 
+  console.log('new object', todo);
+
   const todoId = project.addTodo(todo);
   form.reset();
   form.querySelector('[name="id"]').value = '';
+  form.querySelector('[name="complete"]').removeAttribute('checked');
   // TODO: avoid shaking storage 2 times! (on save, on render)
   ui.renderTodo(todoId);
 }
@@ -131,11 +140,18 @@ todoList.addEventListener('click', (e) => {
     // 1. get todo details from storage
     const todoId = target.closest('.js-todo-item').id;
     const data = storage.get(`Todo_${todoId}`);
+    console.log('data', data);
+
     const form = document.querySelector('.js-form-add-todo');
     // 2. populate form
     Object.entries(data).forEach(([key, value]) => {
       try {
-        form.querySelector(`[name="${key}"]`).value = value;
+        console.log(1, key, value);
+        if (key !== 'complete') {
+          form.querySelector(`[name="${key}"]`).value = value;
+        } else if (value === true) {
+          form.querySelector(`[name="${key}"]`).setAttribute('checked', true);
+        }
       } catch (error) {
         console.warn(`Missing [name="${key}"] element\n`, error);
       }
