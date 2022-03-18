@@ -45,7 +45,16 @@ UI.prototype.renderTodo = function (id) {
       </div>
     </div>
   `;
-  container.insertAdjacentHTML('beforeend', template);
+
+  // TODO: refactor render methods
+  // replace old project node on 'edit/update' action
+  const oldItem = container.querySelector(`#${id}`);
+  if (oldItem !== null) {
+    oldItem.insertAdjacentHTML('afterend', template);
+    oldItem.remove();
+  } else {
+    container.insertAdjacentHTML('beforeend', template);
+  }
 };
 
 export default UI;
