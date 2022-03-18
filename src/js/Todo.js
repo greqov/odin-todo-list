@@ -1,7 +1,6 @@
 import generateId from './utils/id';
 import trimStr from './utils/trimStr';
 
-// TODO: not sure about passing id
 function Todo(data) {
   const { id, title, dueDate, priority = 'low', complete } = data;
 
@@ -12,13 +11,17 @@ function Todo(data) {
   this.complete = complete === 'on';
 }
 
-// TODO: add save (to storage) method too?
+Todo.prototype.save = function () {
+  this.storage.save(this);
+};
 
 Todo.prototype.update = function (data) {
   // TODO: assume data doesn't have undefined values
   Object.assign(this, data);
+  this.save();
 };
 
+// TODO: remove it?
 Todo.prototype.toggle = function () {
   this.complete = !this.complete;
 };
