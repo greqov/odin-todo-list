@@ -79,12 +79,14 @@ function submitTodoForm(e) {
   let todo;
   const form = e.target;
   const data = Object.fromEntries(new FormData(form).entries());
+  data.complete = !!data.complete; // convert 'on' to true
   const projectId = projectsManager.currentProject;
   const project = ui.pm.getRestoredProject(projectId);
 
   // NOTE: update OR create action
   if (data.id) {
     todo = project.getRestoredTodo(data.id);
+    console.log('orig todo', todo);
     todo.update(data);
   } else {
     todo = data;

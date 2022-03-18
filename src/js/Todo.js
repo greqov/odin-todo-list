@@ -8,7 +8,7 @@ function Todo(data) {
   this.title = trimStr(title);
   this.dueDate = dueDate || new Date();
   this.priority = priority;
-  this.complete = complete === 'on';
+  this.complete = complete; // TODO: not sure (complete === 'on' was here)
 }
 
 Todo.prototype.save = function () {
