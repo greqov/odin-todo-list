@@ -36,6 +36,11 @@ Project.prototype.removeTodo = function (id) {
   this.save();
 };
 
+Project.prototype.getRestoredTodo = function (id) {
+  const obj = this.storage.get(`Todo_${id}`);
+  return new Todo(obj);
+};
+
 // TODO: maybe avoid removing todo from storage?
 // TODO: maybe pass projectId?
 Project.prototype.moveTodo = function (todo, project) {
