@@ -8,6 +8,16 @@ UI.prototype.init = function () {
   console.log('init fn');
 };
 
+function replaceOldItem(container, id, template) {
+  const oldItem = container.querySelector(`#${id}`);
+  if (oldItem !== null) {
+    oldItem.insertAdjacentHTML('afterend', template);
+    oldItem.remove();
+  } else {
+    container.insertAdjacentHTML('beforeend', template);
+  }
+}
+
 UI.prototype.renderProject = function (id) {
   const container = document.querySelector('.js-projects-list');
   const { title } = this.storage.get(`Project_${id}`);
@@ -21,13 +31,7 @@ UI.prototype.renderProject = function (id) {
   // TODO: show todos count?
 
   // replace old project node on 'edit/update' action
-  const oldItem = container.querySelector(`#${id}`);
-  if (oldItem !== null) {
-    oldItem.insertAdjacentHTML('afterend', template);
-    oldItem.remove();
-  } else {
-    container.insertAdjacentHTML('beforeend', template);
-  }
+  replaceOldItem(container, id, template);
 };
 
 UI.prototype.renderTodo = function (id) {
@@ -39,7 +43,7 @@ UI.prototype.renderTodo = function (id) {
       <div>${dueDate}</div>
       <div>priority: ${priority}</div>
       <div>
-        complete: ${complete}
+        complete:
         <input type="checkbox" ${complete ? 'checked' : ''} class="js-todo-toggle" />
       </div>
       <div>
@@ -51,13 +55,7 @@ UI.prototype.renderTodo = function (id) {
 
   // TODO: refactor render methods
   // replace old project node on 'edit/update' action
-  const oldItem = container.querySelector(`#${id}`);
-  if (oldItem !== null) {
-    oldItem.insertAdjacentHTML('afterend', template);
-    oldItem.remove();
-  } else {
-    container.insertAdjacentHTML('beforeend', template);
-  }
+  replaceOldItem(container, id, template);
 };
 
 export default UI;
