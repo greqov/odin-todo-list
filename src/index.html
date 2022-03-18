@@ -33,6 +33,7 @@
     </div> -->
     <button class="js-btn-add-todo" type="button">Add todo</button>
     <form class="js-form-add-todo" action="#">
+      <input type="hidden" name="id" value="" />
       <input type="text" name="title" placeholder="Title" autofocus />
       <!-- TODO: set default value -->
       <input type="date" name="dueDate" value="2022-03-16" />
@@ -45,6 +46,11 @@
         <input type="checkbox" name="complete" id="todoComplete" />
         <label for="todoComplete">complete?</label>
       </div>
+      <!-- TODO: add selectbox? -->
+      <!-- <select name="project">
+        <option value="inbox">Inbox</option>
+        <option value="archive">Archive</option>
+      </select> -->
       <button type="button">Cancel</button>
       <button type="submit">Add/Update todo</button>
     </form>

@@ -50,7 +50,7 @@ projectsManager.projects.forEach((id) => {
 
 function submitProjectForm(e) {
   e.preventDefault();
-  let project = {};
+  let project;
   const form = e.target;
   const data = Object.fromEntries(new FormData(form).entries());
 
@@ -69,6 +69,33 @@ function submitProjectForm(e) {
   ui.renderProject(project.id);
 }
 
+function submitTodoForm(e) {
+  e.preventDefault();
+  let todo;
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+  console.log('data from form:', data);
+
+  const projectId = projectsManager.currentProject;
+  const project = ui.pm.getRestoredProject(projectId);
+
+  // NOTE: update OR create action
+  if (data.id) {
+    console.log('update action');
+    todo = ui.storage.get(`Todo_${data.id}`);
+    Object.assign(todo, data);
+  } else {
+    console.log('create action');
+    todo = data;
+  }
+
+  const todoId = project.addTodo(todo);
+  form.reset();
+  form.querySelector('[name="id"]').value = '';
+  // TODO: avoid shaking storage 2 times! (on save, on render)
+  ui.renderTodo(todoId);
+}
+
 // TODO: maybe add more precise dom node, not document?
 document.addEventListener('submit', (e) => {
   console.log('submit action');
@@ -80,16 +107,7 @@ document.addEventListener('submit', (e) => {
   }
 
   if (target.classList.contains('js-form-add-todo')) {
-    e.preventDefault();
-    const form = target;
-    const data = Object.fromEntries(new FormData(form).entries());
-    form.reset();
-    // TODO: add todo to project
-    const projectId = projectsManager.currentProject;
-    const project = ui.pm.getRestoredProject(projectId);
-    const todoId = project.addTodo(data);
-    // TODO: avoid shaking storage 2 times! (on save, on render)
-    ui.renderTodo(todoId);
+    submitTodoForm(e);
   }
 });
 
@@ -109,7 +127,19 @@ todoList.addEventListener('click', (e) => {
     // 4. update UI
     todoEl.remove();
   } else if (target.classList.contains('js-btn-todo-edit')) {
-    console.log('do edit action');
+    console.log('do edit todo action');
+    // 1. get todo details from storage
+    const todoId = target.closest('.js-todo-item').id;
+    const data = storage.get(`Todo_${todoId}`);
+    const form = document.querySelector('.js-form-add-todo');
+    // 2. populate form
+    Object.entries(data).forEach(([key, value]) => {
+      try {
+        form.querySelector(`[name="${key}"]`).value = value;
+      } catch (error) {
+        console.warn(`Missing [name="${key}"] element\n`, error);
+      }
+    });
   }
 });
 
