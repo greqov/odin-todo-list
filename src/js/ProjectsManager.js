@@ -19,12 +19,14 @@ ProjectsManager.prototype.addProject = function (id) {
 
 // TODO: add warning about deleting {n} todo items
 ProjectsManager.prototype.deleteProject = function (id) {
-  if (this.defaultProject === id) {
+  if (id === this.defaultProject) {
     console.warn('WARNING: Cannot delete default project');
     return;
   }
 
-  // TODO: update this.currentProject on deleteting current project.
+  if (id === this.currentProject) {
+    this.setCurrentProject(this.defaultProject);
+  }
 
   this.projects = this.projects.filter((i) => i !== id);
   this.save();
@@ -34,6 +36,11 @@ ProjectsManager.prototype.deleteProject = function (id) {
 
 ProjectsManager.prototype.getRestoredProject = function (id) {
   return new Project(this.storage.get(`Project_${id}`));
+};
+
+ProjectsManager.prototype.setCurrentProject = function (id) {
+  this.currentProject = id;
+  this.save();
 };
 
 export default ProjectsManager;
