@@ -107,6 +107,18 @@ export default function handlers(ui) {
     }
   });
 
+  function highlightProject(target) {
+    const list = target.closest('.js-projects-list');
+    const projectEl = target.closest('.js-project-item');
+    try {
+      list.querySelectorAll('.is-active')[0].classList.remove('is-active');
+    } catch (error) {
+      console.log(`INFO: There is no highlighted project\n`, error);
+    }
+    projectEl.classList.add('is-active');
+    pm.setCurrentProject(projectEl.id);
+  }
+
   const projectsList = document.querySelector('.js-projects-list');
   projectsList.addEventListener('click', (e) => {
     const { target } = e;
@@ -128,16 +140,7 @@ export default function handlers(ui) {
       form.querySelector('[name="id"]').value = data.id;
       // 2. TODO: show form with populated data (in modal?)
     } else if (target.classList.contains('js-project-item-box')) {
-      // highlight current project in sidebar
-      const list = target.closest('.js-projects-list');
-      const projectEl = target.closest('.js-project-item');
-      try {
-        list.querySelectorAll('.is-active')[0].classList.remove('is-active');
-      } catch (error) {
-        console.log(`INFO: There is no highlighted project\n`, error);
-      }
-      projectEl.classList.add('is-active');
-      pm.setCurrentProject(projectEl.id);
+      highlightProject(target);
     }
   });
 }
