@@ -1,3 +1,5 @@
+import handlers from './handlers';
+
 function UI(pm, storage) {
   // TODO: maybe better pass storage? Do I need pm?
   this.pm = pm; // damn!
@@ -63,6 +65,10 @@ UI.prototype.renderAllTodos = function (projectId) {
   data.todos.forEach((id) => {
     this.renderTodo(id);
   });
+};
+
+UI.prototype.addHandlers = function () {
+  handlers(this);
 };
 
 export default UI;
