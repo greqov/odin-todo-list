@@ -60,7 +60,7 @@ UI.prototype.renderTodo = function (id) {
   replaceOldItem(container, id, template);
 };
 
-UI.prototype.renderAllTodos = function (projectId) {
+UI.prototype.renderProjectTodos = function (projectId = this.pm.currentProject) {
   const data = this.storage.get(`Project_${projectId}`);
   data.todos.forEach((id) => {
     this.renderTodo(id);

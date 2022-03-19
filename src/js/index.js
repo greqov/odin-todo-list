@@ -46,7 +46,7 @@ const archiveProject = new Project({ title: 'Archive' });
 archiveProject.loadData(archiveTodosData);
 projectsManager.addProject(archiveProject.id);
 
-ui.renderAllTodos(projectsManager.currentProject);
+ui.renderProjectTodos();
 
 projectsManager.projects.forEach((id) => {
   ui.renderProject(id);
