@@ -58,4 +58,11 @@ UI.prototype.renderTodo = function (id) {
   replaceOldItem(container, id, template);
 };
 
+UI.prototype.renderAllTodos = function (projectId) {
+  const data = this.storage.get(`Project_${projectId}`);
+  data.todos.forEach((id) => {
+    this.renderTodo(id);
+  });
+};
+
 export default UI;
