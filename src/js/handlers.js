@@ -54,12 +54,12 @@ export default function handlers(ui) {
   document.addEventListener('submit', (e) => {
     const { target: el } = e;
 
-    if (el.classList.contains('js-form-add-project')) {
+    if (el.matches('.js-form-add-project')) {
       submitProjectForm(e);
       return;
     }
 
-    if (el.classList.contains('js-form-add-todo')) {
+    if (el.matches('.js-form-add-todo')) {
       submitTodoForm(e);
     }
   });
@@ -107,11 +107,11 @@ export default function handlers(ui) {
   const todoList = document.querySelector('.js-todo-list');
   todoList.addEventListener('click', (e) => {
     const { target: el } = e;
-    if (el.classList.contains('js-btn-todo-delete')) {
+    if (el.matches('.js-btn-todo-delete')) {
       removeTodo(el);
-    } else if (el.classList.contains('js-btn-todo-edit')) {
+    } else if (el.matches('.js-btn-todo-edit')) {
       editTodo(el);
-    } else if (el.classList.contains('js-todo-toggle')) {
+    } else if (el.matches('.js-todo-toggle')) {
       toggleTodo(el);
     }
   });
@@ -150,11 +150,11 @@ export default function handlers(ui) {
   const projectsList = document.querySelector('.js-projects-list');
   projectsList.addEventListener('click', (e) => {
     const { target: el } = e;
-    if (el.classList.contains('js-btn-project-delete')) {
+    if (el.matches('.js-btn-project-delete')) {
       removeProject(el);
-    } else if (el.classList.contains('js-btn-project-edit')) {
+    } else if (el.matches('.js-btn-project-edit')) {
       editProject(el);
-    } else if (el.classList.contains('js-project-item-box')) {
+    } else if (el.matches('.js-project-item-box')) {
       highlightProject(el);
     }
   });
