@@ -25,8 +25,8 @@ UI.prototype.renderProject = function (id) {
   const { title } = this.storage.get(`Project_${id}`);
   // TODO: get id, title
   const template = `
-    <div id="${id}" class="js-project-item">
-      <span>${title}</span>
+    <div id="${id}" class="js-project-item ${id === this.pm.currentProject ? 'is-active' : ''}">
+      <span class="js-project-item-box">${title}</span>
       <button class="js-btn-project-edit" type="button">edit</button>
       <button class="js-btn-project-delete" type="button">delete</button>
     </div>`;
