@@ -3,6 +3,6 @@ const s4 = () =>
     .toString(16)
     .substring(1);
 
-const generateId = () => `${s4()}-${s4()}-${s4()}`;
+const generateId = () => `a${s4()}-${s4()}-${s4()}`;
 
 export default generateId;

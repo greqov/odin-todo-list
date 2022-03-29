@@ -14,6 +14,11 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
+    open: {
+      app: {
+        name: 'chromium',
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
