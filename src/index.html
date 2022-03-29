@@ -1,60 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Template</title>
+    <title>Todo App</title>
   </head>
-  <body>
-    <h2>Projects</h2>
-    <div class="js-projects-list">projects list</div>
-    <!-- <div id="">
-      <span>Title</span>
-      <button type="button">edit</button>
-      <button type="button">delete</button>
-    </div> -->
-    <button class="js-btn-add-project" type="button">Add project</button>
+  <body class="font-sans bg-zinc-50 selection:bg-pink-300">
+    <div class="container mx-auto px-4">
+      <h2 class="my-4 text-3xl font-bold">Projects</h2>
 
-    <form class="js-form-add-project" action="#">
-      <input type="hidden" name="id" value="" />
-      <input type="text" name="title" placeholder="Project title" autofocus />
-      <button class="js-btn-calcel-form" type="button">Cancel</button>
-      <button class="js-btn-submit-project" type="submit">Add project</button>
-    </form>
+      <div class="js-projects-list">projects list</div>
 
-    <h2>TODOs</h2>
-    <div class="js-todo-list">todos list</div>
-    <!-- <div id="">
-      <div>title</div>
-      <div>dueDate</div>
-      <div>priority</div>
-      <div>complete: complete</div>
-    </div> -->
-    <button class="js-btn-add-todo" type="button">Add todo</button>
-    <form class="js-form-add-todo" action="#">
-      <input type="hidden" name="id" value="" />
-      <input type="text" name="title" placeholder="Title" autofocus />
-      <!-- TODO: set default value -->
-      <input type="date" name="dueDate" value="2022-03-16" />
-      <select name="priority">
-        <option value="low">Low</option>
-        <option value="middle">Middle</option>
-        <option value="high">High</option>
-      </select>
-      <div>
-        <input type="checkbox" name="complete" id="todoComplete" />
-        <label for="todoComplete">complete?</label>
+      <button class="js-btn-add-project" type="button">Add project</button>
+
+      <form class="js-form-add-project" action="#">
+        <input type="hidden" name="id" value="" />
+
+        <label class="block">
+          <span class="block font-medium text-slate-700">Project title</span>
+          <input
+            class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm text-base placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+            type="text"
+            name="title"
+            placeholder="Project title"
+            autofocus
+          />
+        </label>
+
+        <button class="js-btn-calcel-form" type="button">Cancel</button>
+        <button class="js-btn-submit-project" type="submit">Add project</button>
+      </form>
+
+      <h2 class="my-4 text-3xl font-bold">Todos</h2>
+      <div class="js-todo-list">todos list</div>
+
+      <button class="js-btn-add-todo" type="button">Add todo</button>
+
+      <form class="js-form-add-todo" action="#">
+        <input type="hidden" name="id" value="" />
+
+        <label class="block">
+          <span class="block font-medium text-slate-700">Title</span>
+          <input
+            class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm text-base placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+            type="text"
+            name="title"
+            placeholder="Title"
+            autofocus
+          />
+        </label>
+
+        <!-- TODO: set default value -->
+        <label class="block">
+          <span class="block font-medium text-slate-700">Due date</span>
+          <input
+            class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm text-base placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+            type="date"
+            name="dueDate"
+            value="2022-03-16"
+          />
+        </label>
+
+        <div class="">
+          <label for="priority" class="block font-medium text-slate-700">Priority</label>
+          <select
+            id="priority"
+            name="priority"
+            autocomplete="country-name"
+            class="mt-1 block w-full py-2 px-3 border border-slate-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500"
+          >
+            <option value="low">Low</option>
+            <option value="middle">Middle</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input
+              id="todoComplete"
+              name="complete"
+              type="checkbox"
+              class="focus:ring-sky-500 h-4 w-4 text-sky-600 border-slate-300 rounded"
+            />
+          </div>
+          <div class="ml-3">
+            <label for="todoComplete" class="font-medium text-slate-700">Complete?</label>
+          </div>
+        </div>
+
+        <!-- TODO: add selectbox? -->
+        <!-- <select name="project">
+          <option value="inbox">Inbox</option>
+          <option value="archive">Archive</option>
+        </select> -->
+
+        <button type="button">Cancel</button>
+        <button type="submit">Add/Update todo</button>
+      </form>
+    </div>
+
+    <footer class="mt-6 border-t text-center">
+      <div class="container mx-auto py-6">
+        <a
+          href="https://github.com/greqov/odin-todo-list"
+          target="_blank"
+          class="flex justify-center items-center space-x-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            width="24"
+            height="24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+            />
+          </svg>
+          <span>Github</span>
+        </a>
       </div>
-      <!-- TODO: add selectbox? -->
-      <!-- <select name="project">
-        <option value="inbox">Inbox</option>
-        <option value="archive">Archive</option>
-      </select> -->
-      <button type="button">Cancel</button>
-      <button type="submit">Add/Update todo</button>
-    </form>
-
-    <footer>footer</footer>
+    </footer>
   </body>
 </html>

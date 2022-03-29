@@ -25,7 +25,9 @@ UI.prototype.renderProject = function (id) {
   const { title } = this.storage.get(`Project_${id}`);
   // TODO: get id, title
   const template = `
-    <div id="${id}" class="js-project-item ${id === this.pm.currentProject ? 'is-active' : ''}">
+    <div id="${id}" class="js-project-item ${id === this.pm.currentProject ? 'is-active' : ''}
+      mb-4 p-4 bg-white rounded-lg shadow-lg
+    ">
       <span class="js-project-item-box">${title}</span>
       <button class="js-btn-project-edit" type="button">edit</button>
       <button class="js-btn-project-delete" type="button">delete</button>
@@ -40,7 +42,9 @@ UI.prototype.renderTodo = function (id) {
   const container = document.querySelector('.js-todo-list');
   const { title, dueDate, priority, complete } = this.storage.get(`Todo_${id}`);
   const template = `
-    <div id="${id}" class="js-todo-item" style="border-bottom: 1px solid;">
+    <div id="${id}"
+      class="js-todo-item mb-4 p-4 bg-white rounded-lg shadow-lg"
+    >
       <div>${title}</div>
       <div>${dueDate}</div>
       <div>priority: ${priority}</div>
