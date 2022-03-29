@@ -12,12 +12,19 @@
 
       <div class="js-projects-list">projects list</div>
 
-      <button class="js-btn-add-project" type="button">Add project</button>
+      <div class="flex justify-end space-x-2">
+        <button
+          class="js-btn-add-project inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition"
+          type="button"
+        >
+          Add project
+        </button>
+      </div>
 
       <form class="js-form-add-project" action="#">
         <input type="hidden" name="id" value="" />
 
-        <label class="block">
+        <label class="block mb-4">
           <span class="block font-medium text-slate-700">Project title</span>
           <input
             class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm text-base placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
@@ -28,16 +35,35 @@
           />
         </label>
 
-        <button class="js-btn-calcel-form" type="button">Cancel</button>
-        <button class="js-btn-submit-project" type="submit">Add project</button>
+        <div class="flex justify-end space-x-2">
+          <button
+            class="js-btn-calcel-form inline-flex px-4 py-2 text-slate-700 bg-transparent hover:border-slate-200 active:border-slate-400 active:bg-slate-200 border border-transparent rounded-md transition"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="js-btn-submit-project inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition"
+            type="submit"
+          >
+            Add project
+          </button>
+        </div>
       </form>
 
       <h2 class="my-4 text-3xl font-bold">Todos</h2>
       <div class="js-todo-list">todos list</div>
 
-      <button class="js-btn-add-todo" type="button">Add todo</button>
+      <div class="flex justify-end space-x-2">
+        <button
+          class="js-btn-add-todo js-btn-add-project inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition"
+          type="button"
+        >
+          Add todo
+        </button>
+      </div>
 
-      <form class="js-form-add-todo" action="#">
+      <form class="js-form-add-todo space-y-4" action="#">
         <input type="hidden" name="id" value="" />
 
         <label class="block">
@@ -82,7 +108,7 @@
               id="todoComplete"
               name="complete"
               type="checkbox"
-              class="focus:ring-sky-500 h-4 w-4 text-sky-600 border-slate-300 rounded"
+              class="focus:ring-sky-500 h-4 w-4 text-sky-500 border-slate-300 rounded"
             />
           </div>
           <div class="ml-3">
@@ -96,8 +122,20 @@
           <option value="archive">Archive</option>
         </select> -->
 
-        <button type="button">Cancel</button>
-        <button type="submit">Add/Update todo</button>
+        <div class="flex justify-end space-x-2">
+          <button
+            class="inline-flex px-4 py-2 text-slate-700 bg-transparent hover:border-slate-200 active:border-slate-400 active:bg-slate-200 border border-transparent rounded-md transition"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition"
+            type="submit"
+          >
+            Add/Update todo
+          </button>
+        </div>
       </form>
     </div>
 
