@@ -26,11 +26,25 @@ UI.prototype.renderProject = function (id) {
   // TODO: get id, title
   const template = `
     <div id="${id}" class="js-project-item ${id === this.pm.currentProject ? 'text-orange-600' : ''}
-      mb-4 p-4 bg-white rounded-lg shadow-lg
+      mb-4 p-4 flex justify-between items-center bg-white rounded-lg shadow-lg
     ">
-      <span class="js-project-item-box">${title}</span>
-      <button class="js-btn-project-edit underline italic text-slate-700" type="button">edit</button>
-      <button class="js-btn-project-delete underline italic text-slate-700" type="button">delete</button>
+      <span class="js-project-item-box text-lg font-bold">${title}</span>
+      <div class="space-x-2">
+        <button
+          class="js-btn-project-edit underline italic text-slate-400 hover:text-sky-500 transition"
+          type="button"
+          title="Edit project"
+        >
+          <svg class="w-6 h-6"><use xlink:href="#icon-edit"></use></svg>
+        </button>
+        <button
+          class="js-btn-project-delete underline italic text-slate-400 hover:text-red-500 transition"
+          type="button"
+          title="Delete project"
+        >
+          <svg class="w-6 h-6"><use xlink:href="#icon-trash"></use></svg>
+        </button>
+      </div>
     </div>`;
   // TODO: show todos count?
 
@@ -53,8 +67,20 @@ UI.prototype.renderTodo = function (id) {
         <input type="checkbox" ${complete ? 'checked' : ''} class="js-todo-toggle" />
       </div>
       <div>
-        <button class="js-btn-todo-edit underline italic text-slate-700" type="button">edit</button>
-        <button class="js-btn-todo-delete underline italic text-slate-700" type="button">delete</button>
+        <button
+          class="js-btn-todo-edit underline italic text-slate-400 hover:text-sky-500 transition"
+          type="button"
+          title="Edit todo"
+        >
+          <svg class="w-6 h-6"><use xlink:href="#icon-edit"></use></svg>
+        </button>
+        <button
+          class="js-btn-todo-delete underline italic text-slate-400 hover:text-red-500 transition"
+          type="button"
+          title="Delete todo"
+        >
+          <svg class="w-6 h-6"><use xlink:href="#icon-trash"></use></svg>
+        </button>
       </div>
     </div>
   `;
