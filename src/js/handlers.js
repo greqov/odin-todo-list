@@ -54,12 +54,12 @@ export default function handlers(ui) {
   document.addEventListener('submit', (e) => {
     const { target: el } = e;
 
-    if (el.matches('.js-form-add-project')) {
+    if (el.closest('.js-form-add-project')) {
       submitProjectForm(e);
       return;
     }
 
-    if (el.matches('.js-form-add-todo')) {
+    if (el.closest('.js-form-add-todo')) {
       submitTodoForm(e);
     }
   });
@@ -107,11 +107,11 @@ export default function handlers(ui) {
   const todoList = document.querySelector('.js-todo-list');
   todoList.addEventListener('click', (e) => {
     const { target: el } = e;
-    if (el.matches('.js-btn-todo-delete')) {
+    if (el.closest('.js-btn-todo-delete')) {
       removeTodo(el);
-    } else if (el.matches('.js-btn-todo-edit')) {
+    } else if (el.closest('.js-btn-todo-edit')) {
       editTodo(el);
-    } else if (el.matches('.js-todo-toggle')) {
+    } else if (el.closest('.js-todo-toggle')) {
       toggleTodo(el);
     }
   });
@@ -136,25 +136,26 @@ export default function handlers(ui) {
   }
 
   function highlightProject(el) {
+    const activeClassName = 'text-orange-600';
     const list = el.closest('.js-projects-list');
     const projectEl = el.closest('.js-project-item');
     try {
-      list.querySelectorAll('.is-active')[0].classList.remove('is-active');
+      list.querySelector(`.${activeClassName}`).classList.remove(`${activeClassName}`);
     } catch (error) {
       console.log(`INFO: There is no highlighted project\n`, error);
     }
-    projectEl.classList.add('is-active');
+    projectEl.classList.add(`${activeClassName}`);
     pm.setCurrentProject(projectEl.id);
   }
 
   const projectsList = document.querySelector('.js-projects-list');
   projectsList.addEventListener('click', (e) => {
     const { target: el } = e;
-    if (el.matches('.js-btn-project-delete')) {
+    if (el.closest('.js-btn-project-delete')) {
       removeProject(el);
-    } else if (el.matches('.js-btn-project-edit')) {
+    } else if (el.closest('.js-btn-project-edit')) {
       editProject(el);
-    } else if (el.matches('.js-project-item-box')) {
+    } else if (el.closest('.js-project-item-box')) {
       highlightProject(el);
     }
   });
