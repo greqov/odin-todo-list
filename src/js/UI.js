@@ -1,3 +1,4 @@
+import checkbox from './components/checkbox';
 import handlers from './handlers';
 
 function UI(pm, storage) {
@@ -63,8 +64,7 @@ UI.prototype.renderTodo = function (id) {
       <div>${dueDate}</div>
       <div>priority: ${priority}</div>
       <div>
-        complete:
-        <input type="checkbox" ${complete ? 'checked' : ''} class="js-todo-toggle" />
+        ${checkbox('Complete?', 'complete', `check_${id}`, complete)}
       </div>
       <div>
         <button
