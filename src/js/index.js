@@ -6,6 +6,8 @@ import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
+import modal from './components/modal';
+
 import '../css/styles.css';
 
 const storage = (function initStorage() {
@@ -51,3 +53,5 @@ ui.renderProjectTodos();
 projectsManager.projects.forEach((id) => {
   ui.renderProject(id);
 });
+
+document.body.insertAdjacentHTML('beforeend', modal());
