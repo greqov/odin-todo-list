@@ -35,6 +35,8 @@ const projectsManager = (function initProjectsManager() {
   return pm;
 })();
 
+document.body.insertAdjacentHTML('beforeend', modal());
+
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
 
@@ -53,5 +55,3 @@ ui.renderProjectTodos();
 projectsManager.projects.forEach((id) => {
   ui.renderProject(id);
 });
-
-document.body.insertAdjacentHTML('beforeend', modal());

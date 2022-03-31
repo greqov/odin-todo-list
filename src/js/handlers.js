@@ -127,6 +127,7 @@ export default function handlers(ui) {
   }
 
   function editProject(el) {
+    // TODO: add check for empty title on edit action
     const projectId = el.closest('.js-project-item').id;
     const data = storage.get(`Project_${projectId}`);
     const form = document.querySelector('.js-form-add-project');
@@ -158,5 +159,35 @@ export default function handlers(ui) {
     } else if (el.closest('.js-project-item-box')) {
       highlightProject(el);
     }
+  });
+
+  function showModal() {
+    document.body.classList.toggle('overflow-hidden');
+    document.querySelector('.js-modal-overlay').classList.toggle('hidden');
+    document.querySelector('.js-modal-overlay').classList.toggle('flex');
+  }
+
+  function closeModal() {
+    document.body.classList.toggle('overflow-hidden');
+    document.querySelector('.js-modal-overlay').classList.toggle('hidden');
+    document.querySelector('.js-modal-overlay').classList.toggle('flex');
+  }
+
+  const modal = document.querySelector('.js-modal');
+  console.log(`111 modal`, modal);
+  const modalClosers = document.querySelectorAll('.js-modal-closer');
+  modalClosers.forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
+
+  // TODO: use toggleModal only?
+  // TODO: use data-attrs for modal actions
+  // TODO: close modal on 'Esc'
+  // TODO: add transition on open/close modal
+  // TODO: fix scrollbar width on toggle modal action
+
+  const modalBtn = document.querySelector('.js-show-modal-btn');
+  modalBtn.addEventListener('click', () => {
+    showModal();
   });
 }
