@@ -1,5 +1,6 @@
 import Project from './Project';
 import Todo from './Todo';
+import getScrollWidth from './utils/getScrollWidth';
 
 export default function handlers(ui) {
   const { pm, storage } = ui;
@@ -161,20 +162,34 @@ export default function handlers(ui) {
     }
   });
 
+  function insertHelperStyles() {
+    const styles = document.createElement('style');
+    styles.innerHTML = `
+      :root { --scroll-width: ${getScrollWidth()}px; }
+
+      .body-padding-fix {
+        padding-right: var(--scroll-width);
+      }
+    `;
+    document.head.appendChild(styles);
+  }
+
+  insertHelperStyles();
+
   function showModal() {
-    document.body.classList.toggle('overflow-hidden');
-    document.querySelector('.js-modal-overlay').classList.toggle('hidden');
-    document.querySelector('.js-modal-overlay').classList.toggle('flex');
+    document.body.classList.add('overflow-hidden', 'body-padding-fix');
+    document.querySelector('.js-modal-overlay').classList.remove('hidden');
+    document.querySelector('.js-modal-overlay').classList.add('flex');
   }
 
   function closeModal() {
-    document.body.classList.toggle('overflow-hidden');
-    document.querySelector('.js-modal-overlay').classList.toggle('hidden');
-    document.querySelector('.js-modal-overlay').classList.toggle('flex');
+    document.body.classList.remove('overflow-hidden', 'body-padding-fix');
+    document.querySelector('.js-modal-overlay').classList.add('hidden');
+    document.querySelector('.js-modal-overlay').classList.remove('flex');
   }
 
   const modal = document.querySelector('.js-modal');
-  console.log(`111 modal`, modal);
+  console.log(`>>> modal`, modal);
   const modalClosers = document.querySelectorAll('.js-modal-closer');
   modalClosers.forEach((el) => {
     el.addEventListener('click', closeModal);
