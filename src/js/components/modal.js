@@ -1,6 +1,6 @@
 export default function modal() {
   return `
-    <div class="js-modal-overlay hidden fixed top-0 left-0 h-screen w-screen _flex justify-center items-center p-4 bg-black/75">
+    <div class="js-modal-overlay hidden fixed top-0 left-0 h-screen w-screen _flex justify-center items-center p-4 bg-black/75 overflow-auto">
       <div class="js-modal w-[480px] max-w-full bg-white rounded-lg shadow-lg">
         <div class="flex justify-between items-center space-x-4 p-4">
           <h3 class="text-lg font-bold">Modal title</h3>
@@ -13,7 +13,7 @@ export default function modal() {
             </svg>
           </button>
         </div>
-        <div class="p-4 border-t border-slate-200">
+        <div class="overflow-auto p-4 border-t border-slate-200" style="max-height: calc(100vh - 182px);">
           modal body
         </div>
         <div class="flex justify-end space-x-2 p-4 border-t border-slate-200">
