@@ -1,5 +1,6 @@
 import modalEl from './components/modal';
-import * as projectForm from './components/projectForm';
+import projectForm from './components/projectForm';
+import todoForm from './components/todoForm';
 import getScrollWidth from './utils/getScrollWidth';
 
 function Modal() {
@@ -20,20 +21,14 @@ function insertHelperStyles() {
 
 Modal.prototype.init = function () {
   insertHelperStyles();
-  this.renderModal(); // not sure
+  [projectForm, todoForm].forEach((config) => {
+    this.renderModal(config);
+  });
   this.addHandlers();
 };
 
-Modal.prototype.renderModal = function () {
-  document.body.insertAdjacentHTML(
-    'beforeend',
-    modalEl({
-      id: 'modal-add-project',
-      title: 'Add el projecto',
-      body: projectForm.form,
-      actions: projectForm.buttons,
-    })
-  );
+Modal.prototype.renderModal = function (config) {
+  document.body.insertAdjacentHTML('beforeend', modalEl(config));
 };
 
 Modal.prototype.openModal = function (modal) {

@@ -72,6 +72,7 @@ UI.prototype.renderTodo = function (id) {
           class="js-btn-todo-edit underline italic text-slate-400 hover:text-sky-500 transition"
           type="button"
           title="Edit todo"
+          data-modal-target="modal-add-todo"
         >
           <svg class="w-6 h-6"><use xlink:href="#icon-edit"></use></svg>
         </button>

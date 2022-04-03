@@ -1,3 +1,6 @@
+const id = 'modal-add-project';
+const title = 'Add el projecto';
+
 const form = `
   <form class="js-form-add-project" id="addProjectForm" action="#">
     <input type="hidden" name="id" value="" />
@@ -16,16 +19,16 @@ const form = `
 `;
 // TODO: enable autofocus
 
-const buttons = `
+const actions = `
   <button
-    class="inline-flex px-4 py-2 text-slate-700 bg-transparent hover:border-slate-200 active:border-slate-400 active:bg-slate-200 border border-transparent rounded-md transition"
+    class="inline-flex px-4 py-2 text-slate-700 bg-transparent hover:border-slate-200 active:border-slate-400 active:bg-slate-200 border border-transparent rounded-md transition select-none"
     type="button"
     data-modal-closer
   >
     Cancel
   </button>
   <button
-    class="inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition"
+    class="inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition select-none"
     type="submit"
     form="addProjectForm"
     data-modal-closer
@@ -34,4 +37,4 @@ const buttons = `
   </button>
 `;
 
-export { form, buttons };
+export default { id, title, body: form, actions };
