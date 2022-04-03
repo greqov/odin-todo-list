@@ -36,42 +36,43 @@ Modal.prototype.renderModal = function () {
   );
 };
 
+Modal.prototype.openModal = function (modal) {
+  document.body.classList.add('overflow-hidden', 'body-padding-fix');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+};
+
+Modal.prototype.closeModal = function (modal) {
+  document.body.classList.remove('overflow-hidden', 'body-padding-fix');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+};
+
+Modal.prototype.closeAllModals = function () {
+  (document.querySelectorAll('.js-modal') || []).forEach((modal) => {
+    this.closeModal(modal);
+  });
+};
+
 Modal.prototype.addHandlers = function () {
   document.addEventListener('DOMContentLoaded', () => {
-    function openModal(modal) {
-      document.body.classList.add('overflow-hidden', 'body-padding-fix');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeModal(modal) {
-      document.body.classList.remove('overflow-hidden', 'body-padding-fix');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    function closeAllModals() {
-      (document.querySelectorAll('.js-modal') || []).forEach((modal) => {
-        closeModal(modal);
-      });
-    }
-
     // open modal by [data-modal-target="modal_id"]
-    (document.querySelectorAll('[data-modal-target]') || []).forEach((trigger) => {
-      const id = trigger.dataset.modalTarget;
-      const modal = document.getElementById(id);
-
-      trigger.addEventListener('click', () => {
-        openModal(modal);
-      });
+    document.addEventListener('click', (e) => {
+      const { target } = e;
+      if (target.closest('[data-modal-target]')) {
+        const id = target.closest('[data-modal-target]').dataset.modalTarget;
+        const modal = document.getElementById(id);
+        this.openModal(modal);
+      }
     });
 
     // close modal by [data-modal-closer]
+    // TODO: check for newly created items; use event delegation?
     (document.querySelectorAll('[data-modal-closer]') || []).forEach((closer) => {
       const modal = closer.closest('.js-modal');
 
       closer.addEventListener('click', () => {
-        closeModal(modal);
+        this.closeModal(modal);
       });
     });
 
@@ -80,7 +81,7 @@ Modal.prototype.addHandlers = function () {
       const e = event || window.event;
 
       if (e.code === 'Escape') {
-        closeAllModals();
+        this.closeAllModals();
       }
     });
   });

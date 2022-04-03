@@ -35,6 +35,7 @@ UI.prototype.renderProject = function (id) {
           class="js-btn-project-edit opacity-0 text-slate-400 group-hover:opacity-100 hover:text-sky-500 transition"
           type="button"
           title="Edit project"
+          data-modal-target="modal-add-project"
         >
           <svg class="w-6 h-6"><use xlink:href="#icon-edit"></use></svg>
         </button>
