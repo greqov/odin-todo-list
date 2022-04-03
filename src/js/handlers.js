@@ -176,33 +176,51 @@ export default function handlers(ui) {
 
   insertHelperStyles();
 
-  function showModal() {
-    document.body.classList.add('overflow-hidden', 'body-padding-fix');
-    document.querySelector('.js-modal-overlay').classList.remove('hidden');
-    document.querySelector('.js-modal-overlay').classList.add('flex');
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    function openModal(modal) {
+      document.body.classList.add('overflow-hidden', 'body-padding-fix');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
 
-  function closeModal() {
-    document.body.classList.remove('overflow-hidden', 'body-padding-fix');
-    document.querySelector('.js-modal-overlay').classList.add('hidden');
-    document.querySelector('.js-modal-overlay').classList.remove('flex');
-  }
+    function closeModal(modal) {
+      document.body.classList.remove('overflow-hidden', 'body-padding-fix');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
 
-  const modal = document.querySelector('.js-modal');
-  console.log(`>>> modal`, modal);
-  const modalClosers = document.querySelectorAll('.js-modal-closer');
-  modalClosers.forEach((el) => {
-    el.addEventListener('click', closeModal);
-  });
+    function closeAllModals() {
+      (document.querySelectorAll('.js-modal') || []).forEach((modal) => {
+        closeModal(modal);
+      });
+    }
 
-  // TODO: use toggleModal only?
-  // TODO: use data-attrs for modal actions
-  // TODO: close modal on 'Esc'
-  // TODO: add transition on open/close modal
-  // TODO: fix scrollbar width on toggle modal action
+    // open modal by [data-modal-target="modal_id"]
+    (document.querySelectorAll('[data-modal-target]') || []).forEach((trigger) => {
+      const id = trigger.dataset.modalTarget;
+      const modal = document.getElementById(id);
 
-  const modalBtn = document.querySelector('.js-show-modal-btn');
-  modalBtn.addEventListener('click', () => {
-    showModal();
+      trigger.addEventListener('click', () => {
+        openModal(modal);
+      });
+    });
+
+    // close modal by [data-modal-closer]
+    (document.querySelectorAll('[data-modal-closer]') || []).forEach((closer) => {
+      const modal = closer.closest('.js-modal');
+
+      closer.addEventListener('click', () => {
+        closeModal(modal);
+      });
+    });
+
+    // close modal by Esc
+    document.addEventListener('keydown', (event) => {
+      const e = event || window.event;
+
+      if (e.code === 'Escape') {
+        closeAllModals();
+      }
+    });
   });
 }
