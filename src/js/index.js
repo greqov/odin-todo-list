@@ -6,7 +6,7 @@ import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
-import modal from './components/modal';
+import Modal from './Modal';
 
 import '../css/styles.css';
 
@@ -35,7 +35,8 @@ const projectsManager = (function initProjectsManager() {
   return pm;
 })();
 
-document.body.insertAdjacentHTML('beforeend', modal());
+const modal = new Modal();
+modal.init();
 
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
