@@ -14,6 +14,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
+    watchFiles: ['./src/**/*.html'],
     open: {
       app: {
         name: 'chromium',
