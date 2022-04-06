@@ -6,8 +6,6 @@ import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
-import Modal from './Modal';
-
 import '../css/styles.css';
 
 const storage = (function initStorage() {
@@ -35,14 +33,11 @@ const projectsManager = (function initProjectsManager() {
   return pm;
 })();
 
-const modal = new Modal();
-modal.init();
-
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
 
 const ui = new UI(projectsManager, storage);
-ui.addHandlers();
+ui.init();
 
 // TODO: auto add todo to project on create
 // TODO: save project immediately after creation?

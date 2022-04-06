@@ -12,6 +12,7 @@
   {
     "title": "Look at this gentleman",
     "dueDate": "2022-02-01",
-    "priority": "high"
+    "priority": "high",
+    "complete": true
   }
 ]

@@ -1,5 +1,7 @@
+import layout from './components/layout';
 import checkbox from './components/checkbox';
 import handlers from './handlers';
+import Modal from './Modal';
 
 function UI(pm, storage) {
   // TODO: maybe better pass storage? Do I need pm?
@@ -8,7 +10,10 @@ function UI(pm, storage) {
 }
 
 UI.prototype.init = function () {
-  console.log('init fn');
+  console.log('UI init fn');
+  document.body.insertAdjacentHTML('beforeend', layout);
+  new Modal().init();
+  this.addHandlers();
 };
 
 function replaceOldItem(container, id, template) {
