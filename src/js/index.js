@@ -9,8 +9,6 @@ import archiveTodosData from './data/archiveTodos.json';
 import '../css/styles.css';
 
 const storage = (function initStorage() {
-  // TODO: remove clear on load
-  localStorage.clear();
   const storageEntity = new LocStorage();
   // TODO: is it a good idea?
   Todo.prototype.storage = storageEntity;
@@ -19,19 +17,33 @@ const storage = (function initStorage() {
   return storageEntity;
 })();
 
-const projectsManager = (function initProjectsManager() {
-  const pm = new ProjectsManager();
-  const defautProject = new Project({ title: 'Inbox' });
-  defautProject.save();
-  const { id } = defautProject;
-  pm.defaultProject = id;
-  pm.currentProject = id;
-  pm.addProject(id);
-  // ? add fn to populate storage
-  defautProject.loadData(demoTodosData);
-  // ? check localStorage for data, if so get it!
-  return pm;
-})();
+let projectsManager;
+
+if (storage.isEmpty()) {
+  console.log(`storage is empty`);
+  projectsManager = (function initProjectsManager() {
+    const pm = new ProjectsManager({});
+    const defautProject = new Project({ title: 'Inbox' });
+    defautProject.save();
+    const { id } = defautProject;
+    pm.defaultProject = id;
+    pm.currentProject = id;
+    pm.addProject(id);
+    // ? add fn to populate storage
+    // defautProject.loadData(demoTodosData);
+    return pm;
+  })();
+} else {
+  console.log(`storage is NOT empty!`);
+  try {
+    const data = storage.get('ProjectsManager_');
+    projectsManager = new ProjectsManager(data);
+  } catch (error) {
+    console.warn(`ERROR: localStorage has no "ProjectsManager_" key\n`, error);
+    // NOTE: assume that someone manually deleted this key, so...
+    localStorage.clear();
+  }
+}
 
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
@@ -42,9 +54,11 @@ ui.init();
 // TODO: auto add todo to project on create
 // TODO: save project immediately after creation?
 
-const archiveProject = new Project({ title: 'Archive' });
-archiveProject.loadData(archiveTodosData);
-projectsManager.addProject(archiveProject.id);
+// const archiveProject = new Project({ title: 'Archive' });
+// console.log(`archiveProject`, archiveProject);
+// archiveProject.save();
+// archiveProject.loadData(archiveTodosData);
+// projectsManager.addProject(archiveProject.id);
 
 ui.renderProjectTodos();
 

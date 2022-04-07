@@ -1,9 +1,9 @@
 import Project from './Project';
 
-function ProjectsManager() {
-  this.projects = [];
-  this.defaultProject = null;
-  this.currentProject = null;
+function ProjectsManager({ projects, defaultProject, currentProject }) {
+  this.projects = projects || [];
+  this.defaultProject = defaultProject || null;
+  this.currentProject = currentProject || null;
 }
 
 ProjectsManager.prototype.storage = null;
