@@ -1,34 +1,10 @@
 import { storage } from './LocStorage';
-import ProjectsManager from './ProjectsManager';
-import Project from './Project';
+import { projectsManager } from './ProjectsManager';
 import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
 import '../css/styles.css';
-
-const projectsManager = (function initPM() {
-  let pm;
-
-  if (storage.isEmpty()) {
-    pm = new ProjectsManager({});
-    const defautProject = new Project({ title: 'Inbox' });
-    defautProject.save();
-    const { id } = defautProject;
-    pm.defaultProject = id;
-    pm.currentProject = id;
-    pm.addProject(id);
-    // defautProject.loadData(demoTodosData);
-  } else {
-    const data = storage.get('ProjectsManager_');
-    pm = new ProjectsManager(data);
-  }
-
-  return pm;
-})();
-
-// TODO: on add todo check is there any project (create default one then!)
-// TODO: create sane init() fn?
 
 const ui = new UI(projectsManager, storage);
 ui.init();
