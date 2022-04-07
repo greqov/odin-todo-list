@@ -18,6 +18,7 @@ UI.prototype.init = function () {
   document.body.classList.add(
     'relative',
     'min-h-screen',
+    'overflow-y-scroll',
     'flex',
     'flex-col',
     'font-sans',

@@ -33,12 +33,14 @@ Modal.prototype.renderModal = function (config) {
 
 Modal.prototype.openModal = function (modal) {
   document.body.classList.add('overflow-hidden', 'body-padding-fix');
+  document.body.classList.remove('overflow-y-scroll');
   modal.classList.remove('hidden');
   modal.classList.add('flex');
 };
 
 Modal.prototype.closeModal = function (modal) {
   document.body.classList.remove('overflow-hidden', 'body-padding-fix');
+  document.body.classList.add('overflow-y-scroll');
   modal.classList.add('hidden');
   modal.classList.remove('flex');
 };
