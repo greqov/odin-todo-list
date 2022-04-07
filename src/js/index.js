@@ -17,33 +17,25 @@ const storage = (function initStorage() {
   return storageEntity;
 })();
 
-let projectsManager;
+const projectsManager = (function initPM() {
+  let pm;
 
-if (storage.isEmpty()) {
-  console.log(`storage is empty`);
-  projectsManager = (function initProjectsManager() {
-    const pm = new ProjectsManager({});
+  if (storage.isEmpty()) {
+    pm = new ProjectsManager({});
     const defautProject = new Project({ title: 'Inbox' });
     defautProject.save();
     const { id } = defautProject;
     pm.defaultProject = id;
     pm.currentProject = id;
     pm.addProject(id);
-    // ? add fn to populate storage
     // defautProject.loadData(demoTodosData);
-    return pm;
-  })();
-} else {
-  console.log(`storage is NOT empty!`);
-  try {
+  } else {
     const data = storage.get('ProjectsManager_');
-    projectsManager = new ProjectsManager(data);
-  } catch (error) {
-    console.warn(`ERROR: localStorage has no "ProjectsManager_" key\n`, error);
-    // NOTE: assume that someone manually deleted this key, so...
-    localStorage.clear();
+    pm = new ProjectsManager(data);
   }
-}
+
+  return pm;
+})();
 
 // TODO: on add todo check is there any project (create default one then!)
 // TODO: create sane init() fn?
