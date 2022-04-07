@@ -4,18 +4,6 @@ import Todo from './Todo';
 export default function handlers(ui) {
   const { pm, storage } = ui;
 
-  function highlightCurrentProject() {
-    const activeClassName = 'text-orange-600';
-    const list = document.querySelector('.js-projects-list');
-    const projectEl = list.querySelector(`#${pm.currentProject}`);
-    try {
-      list.querySelector(`.${activeClassName}`).classList.remove(`${activeClassName}`);
-    } catch (error) {
-      console.log(`INFO: There is no highlighted project\n`, error);
-    }
-    projectEl.classList.add(`${activeClassName}`);
-  }
-
   function submitProjectForm(e) {
     e.preventDefault();
     let project;
@@ -36,7 +24,7 @@ export default function handlers(ui) {
     form.reset();
     form.querySelector('[name="id"]').value = '';
     ui.renderProject(project.id);
-    highlightCurrentProject();
+    ui.highlightCurrentProject();
     ui.renderProjectTodos(); // TODO: too much rerenders
   }
 
@@ -142,7 +130,7 @@ export default function handlers(ui) {
 
     if (projectId !== pm.defaultProject) {
       projectEl.remove();
-      highlightCurrentProject();
+      ui.highlightCurrentProject();
       ui.renderProjectTodos();
     }
   }
@@ -165,8 +153,9 @@ export default function handlers(ui) {
     } else if (el.closest('.js-btn-project-edit')) {
       editProject(el);
     } else if (el.closest('.js-project-item')) {
-      pm.setCurrentProject(el.closest('.js-project-item').id);
-      highlightCurrentProject(); // TODO: move to UI?
+      const { id } = el.closest('.js-project-item');
+      pm.setCurrentProject(id);
+      ui.highlightCurrentProject();
       ui.renderProjectTodos();
     }
   });

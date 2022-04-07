@@ -74,6 +74,18 @@ UI.prototype.renderProject = function (id) {
   replaceOldItem(container, id, template);
 };
 
+UI.prototype.highlightCurrentProject = function () {
+  const activeClassName = 'text-orange-600';
+  const list = document.querySelector('.js-projects-list');
+  const projectEl = list.querySelector(`#${this.pm.currentProject}`);
+  try {
+    list.querySelector(`.${activeClassName}`).classList.remove(`${activeClassName}`);
+  } catch (error) {
+    console.log(`INFO: There is no highlighted project\n`, error);
+  }
+  projectEl.classList.add(`${activeClassName}`);
+};
+
 UI.prototype.renderTodo = function (id) {
   const container = document.querySelector('.js-todo-list');
   const { title, dueDate, priority, complete } = this.storage.get(`Todo_${id}`);
