@@ -1,21 +1,11 @@
-import LocStorage from './LocStorage';
+import { storage } from './LocStorage';
 import ProjectsManager from './ProjectsManager';
 import Project from './Project';
-import Todo from './Todo';
 import UI from './UI';
 import demoTodosData from './data/demoTodos.json';
 import archiveTodosData from './data/archiveTodos.json';
 
 import '../css/styles.css';
-
-const storage = (function initStorage() {
-  const storageEntity = new LocStorage();
-  // TODO: is it a good idea?
-  Todo.prototype.storage = storageEntity;
-  Project.prototype.storage = storageEntity;
-  ProjectsManager.prototype.storage = storageEntity;
-  return storageEntity;
-})();
 
 const projectsManager = (function initPM() {
   let pm;

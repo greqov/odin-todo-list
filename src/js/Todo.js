@@ -1,3 +1,4 @@
+import { storage } from './LocStorage';
 import generateId from './utils/id';
 import trimStr from './utils/trimStr';
 
@@ -10,6 +11,8 @@ function Todo(data) {
   this.priority = priority;
   this.complete = complete; // TODO: not sure (complete === 'on' was here)
 }
+
+Todo.prototype.storage = storage;
 
 Todo.prototype.save = function () {
   this.storage.save(this);

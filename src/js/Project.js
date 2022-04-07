@@ -1,17 +1,19 @@
+import { storage } from './LocStorage';
 import Todo from './Todo';
 import generateId from './utils/id';
 import trimStr from './utils/trimStr';
 
 function Project(data) {
   // TODO: do I need to add todos param?
+  // TODO: replace data object with {...} like in ProjectsManager constructor
   const { id, title, todos } = data;
 
   this.id = id || generateId();
-  this.title = trimStr(title);
+  this.title = trimStr(title); // or 'Untitled'?
   this.todos = todos || [];
 }
 
-Project.prototype.storage = null;
+Project.prototype.storage = storage;
 
 // TODO: it's not clear is it a Todo item or {}
 Project.prototype.addTodo = function (todo_) {

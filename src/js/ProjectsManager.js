@@ -1,3 +1,4 @@
+import { storage } from './LocStorage';
 import Project from './Project';
 
 function ProjectsManager({ projects, defaultProject, currentProject }) {
@@ -6,7 +7,7 @@ function ProjectsManager({ projects, defaultProject, currentProject }) {
   this.currentProject = currentProject || null;
 }
 
-ProjectsManager.prototype.storage = null;
+ProjectsManager.prototype.storage = storage;
 
 ProjectsManager.prototype.save = function () {
   this.storage.save(this);
