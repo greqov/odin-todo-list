@@ -1,16 +1,19 @@
+import { storage } from './LocStorage';
+import { projectsManager } from './ProjectsManager';
 import layout from './components/layout';
 import checkbox from './components/checkbox';
 import handlers from './handlers';
 import Modal from './Modal';
 
-function UI(pm, storage) {
-  // TODO: maybe better pass storage? Do I need pm?
-  this.pm = pm; // damn!
-  this.storage = storage;
+function UI() {
+  //
 }
 
+// NOTE: does it make sense to store pm/storage in prototype?
+UI.prototype.pm = projectsManager;
+UI.prototype.storage = storage;
+
 UI.prototype.init = function () {
-  console.log('UI init fn');
   document.querySelector('html').classList.add('scroll-smooth');
   document.body.classList.add(
     'relative',
@@ -119,4 +122,7 @@ UI.prototype.addHandlers = function () {
   handlers(this);
 };
 
+const ui = new UI();
+
+export { ui };
 export default UI;
