@@ -5,7 +5,7 @@ function main() {
       <div>
         <h2 class="my-4 text-3xl font-bold">Projects</h2>
 
-        <div class="js-projects-list">projects list</div>
+        <div class="js-projects-list"></div>
 
         <div class="flex justify-end space-x-2">
           <button
@@ -19,7 +19,7 @@ function main() {
       </div>
       <div>
         <h2 class="my-4 text-3xl font-bold">Todos</h2>
-        <div class="js-todo-list">todos list</div>
+        <div class="js-todo-list"></div>
 
         <div class="flex justify-end space-x-2">
           <button

@@ -47,6 +47,7 @@ export default function handlers(ui) {
     form.querySelector('[name="id"]').value = '';
     form.querySelector('[name="complete"]').removeAttribute('checked');
     // TODO: avoid shaking storage 2 times! (on save, on render)
+    ui.removeNoTodosMessage();
     ui.renderTodo(todoId);
   }
 
@@ -75,6 +76,9 @@ export default function handlers(ui) {
     project.removeTodo(todoId);
     // 4. update UI
     todoEl.remove();
+    if (project.todos.length === 0) {
+      ui.renderNoTodosMessage();
+    }
   }
 
   function editTodo(el) {

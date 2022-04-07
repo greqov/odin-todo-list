@@ -112,12 +112,30 @@ UI.prototype.renderTodo = function (id) {
   replaceOldItem(container, id, template);
 };
 
+UI.prototype.removeNoTodosMessage = function () {
+  const message = document.querySelector('.js-no-todos-message');
+  if (message) {
+    message.remove();
+  }
+};
+
+UI.prototype.renderNoTodosMessage = function () {
+  const message = `<p class="js-no-todos-message mb-4">Wow! Such empty! <span class="underline italic cursor-pointer" data-modal-target="modal-add-todo">Add first todo?</span></p>`;
+  document.querySelector(
+    '.js-todo-list'
+  ).innerHTML = `<div class="js-no-todos-message">${message}</div>`;
+};
+
 UI.prototype.renderProjectTodos = function (projectId = this.pm.currentProject) {
   document.querySelector('.js-todo-list').innerHTML = '';
   const data = this.storage.get(`Project_${projectId}`);
-  data.todos.forEach((id) => {
-    this.renderTodo(id);
-  });
+  if (data.todos.length === 0) {
+    this.renderNoTodosMessage();
+  } else {
+    data.todos.forEach((id) => {
+      this.renderTodo(id);
+    });
+  }
 };
 
 UI.prototype.addHandlers = function () {
