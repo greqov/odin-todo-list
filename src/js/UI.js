@@ -112,6 +112,7 @@ UI.prototype.renderTodo = function (id) {
 };
 
 UI.prototype.renderProjectTodos = function (projectId = this.pm.currentProject) {
+  document.querySelector('.js-todo-list').innerHTML = '';
   const data = this.storage.get(`Project_${projectId}`);
   data.todos.forEach((id) => {
     this.renderTodo(id);

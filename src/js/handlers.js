@@ -158,6 +158,7 @@ export default function handlers(ui) {
       editProject(el);
     } else if (el.closest('.js-project-item')) {
       highlightProject(el);
+      ui.renderProjectTodos();
     }
   });
 }
