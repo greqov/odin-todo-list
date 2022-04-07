@@ -4,6 +4,18 @@ import Todo from './Todo';
 export default function handlers(ui) {
   const { pm, storage } = ui;
 
+  function highlightCurrentProject() {
+    const activeClassName = 'text-orange-600';
+    const list = document.querySelector('.js-projects-list');
+    const projectEl = list.querySelector(`#${pm.currentProject}`);
+    try {
+      list.querySelector(`.${activeClassName}`).classList.remove(`${activeClassName}`);
+    } catch (error) {
+      console.log(`INFO: There is no highlighted project\n`, error);
+    }
+    projectEl.classList.add(`${activeClassName}`);
+  }
+
   function submitProjectForm(e) {
     e.preventDefault();
     let project;
@@ -20,9 +32,12 @@ export default function handlers(ui) {
     }
 
     project.save();
+    pm.setCurrentProject(project.id);
     form.reset();
     form.querySelector('[name="id"]').value = '';
     ui.renderProject(project.id);
+    highlightCurrentProject();
+    ui.renderProjectTodos(); // TODO: too much rerenders
   }
 
   function submitTodoForm(e) {
@@ -127,6 +142,8 @@ export default function handlers(ui) {
 
     if (projectId !== pm.defaultProject) {
       projectEl.remove();
+      highlightCurrentProject();
+      ui.renderProjectTodos();
     }
   }
 
@@ -140,19 +157,6 @@ export default function handlers(ui) {
     form.querySelector('[name="id"]').value = data.id;
   }
 
-  function highlightProject(el) {
-    const activeClassName = 'text-orange-600';
-    const list = el.closest('.js-projects-list');
-    const projectEl = el.closest('.js-project-item');
-    try {
-      list.querySelector(`.${activeClassName}`).classList.remove(`${activeClassName}`);
-    } catch (error) {
-      console.log(`INFO: There is no highlighted project\n`, error);
-    }
-    projectEl.classList.add(`${activeClassName}`);
-    pm.setCurrentProject(projectEl.id);
-  }
-
   const projectsList = document.querySelector('.js-projects-list');
   projectsList.addEventListener('click', (e) => {
     const { target: el } = e;
@@ -161,7 +165,8 @@ export default function handlers(ui) {
     } else if (el.closest('.js-btn-project-edit')) {
       editProject(el);
     } else if (el.closest('.js-project-item')) {
-      highlightProject(el);
+      pm.setCurrentProject(el.closest('.js-project-item').id);
+      highlightCurrentProject(); // TODO: move to UI?
       ui.renderProjectTodos();
     }
   });
