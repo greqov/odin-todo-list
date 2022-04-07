@@ -156,7 +156,7 @@ export default function handlers(ui) {
       removeProject(el);
     } else if (el.closest('.js-btn-project-edit')) {
       editProject(el);
-    } else if (el.closest('.js-project-item-box')) {
+    } else if (el.closest('.js-project-item')) {
       highlightProject(el);
     }
   });
