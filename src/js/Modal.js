@@ -36,6 +36,7 @@ Modal.prototype.openModal = function (modal) {
   document.body.classList.remove('overflow-y-scroll');
   modal.classList.remove('hidden');
   modal.classList.add('flex');
+  modal.querySelector('input[type="text"]').focus();
 };
 
 Modal.prototype.closeModal = function (modal) {
