@@ -14,6 +14,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
+    watchFiles: ['./src/**/*.html'],
     open: {
       app: {
         name: 'chromium',
@@ -24,13 +25,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Template',
       template: './src/index.html',
+      favicon: './src/favicon.ico',
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

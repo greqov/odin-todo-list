@@ -1,7 +1,20 @@
 # TODO List
 
-- Assignment: [PROJECT: TODO LIST](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list)
+- Assignment: [Todo List](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list)
 - Live preview: [https://greqov.github.io/odin-todo-list/](https://greqov.github.io/odin-todo-list/)
+
+## About
+
+Simple (wait wut?) todo list app with localStorage support. Done on _constructors/prototypes_.
+To enable access to global objects (`storage`, `projectsManager`) I've added `storage` property to prototypes like
+
+```js
+Todo.prototype.storage = storage;
+```
+
+I'm not sure if this is a great idea kek.
+
+Development stages: such constructors! => dumpster fire => light at the end of the tunnel.
 
 ## Features
 
@@ -9,46 +22,14 @@
 
 ## TODOs
 
-- [ ] CORE
-  - [ ] TODO item
-    - [x] add object constructor/class
-    - [x] add item's methods
-      - [x] update
-      - [x] push to project
-      - [x] delete
-    - [x] generate random ids
-    - [ ] add demo data
-    - [ ] create todo objects from JSON data
-    - [x] update item properties
-    - [ ] handle dates with _date-fns_
-    - [x] add 'change project' feature
-  - [ ] PROJECT
-    - [x] create/read/update/delete
-    - [ ] set default project
-    - [x] link items to project
-    - [x] update/delete todos on deleting project
-    - [ ] display on UI
-  - [ ] LOCAL STORAGE
-    - [ ] save data
-    - [ ] load data
-    - [ ] update data
-  - [ ] add inputs validation
-    - [ ] strip user inputs
-- [ ] UI
-  - [ ] create sane UI
-    - [ ] set default value in datepicker
-    - [ ] add modals
-  - [ ] style UI
-    - [ ] add normalize/sanitize css
-- [ ] FEATURES
-  - [ ] add filter by date, priority, etc.
-  - [ ] add search field
-- [ ] OTHER
-  - [ ] check TODOs in code
-  - [ ] rewrite to ES classes?
-  - [ ] add content 'Features' section
-  - [ ] refactor code
-  - [ ] update README
+- [ ] add demo data?
+- [ ] add filter by date, priority, etc.
+- [ ] add search field
+
+- [ ] check TODOs in code
+- [ ] add content 'Features' section
+- [ ] refactor code
+- [ ] update README
 
 ## Development
 

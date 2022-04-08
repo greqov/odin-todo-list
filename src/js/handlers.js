@@ -20,9 +20,12 @@ export default function handlers(ui) {
     }
 
     project.save();
+    pm.setCurrentProject(project.id);
     form.reset();
     form.querySelector('[name="id"]').value = '';
     ui.renderProject(project.id);
+    ui.highlightCurrentProject();
+    ui.renderProjectTodos(); // TODO: too much rerenders
   }
 
   function submitTodoForm(e) {
@@ -47,6 +50,7 @@ export default function handlers(ui) {
     form.querySelector('[name="id"]').value = '';
     form.querySelector('[name="complete"]').removeAttribute('checked');
     // TODO: avoid shaking storage 2 times! (on save, on render)
+    ui.removeNoTodosMessage();
     ui.renderTodo(todoId);
   }
 
@@ -54,27 +58,27 @@ export default function handlers(ui) {
   document.addEventListener('submit', (e) => {
     const { target: el } = e;
 
-    if (el.matches('.js-form-add-project')) {
+    if (el.closest('.js-form-add-project')) {
       submitProjectForm(e);
       return;
     }
 
-    if (el.matches('.js-form-add-todo')) {
+    if (el.closest('.js-form-add-todo')) {
       submitTodoForm(e);
     }
   });
 
   function removeTodo(el) {
     const todoEl = el.closest('.js-todo-item');
-    // 1. get todo id
     const todoId = todoEl.id;
-    // 2. get project (hint: current project)
     const projectId = pm.currentProject;
     const project = pm.getRestoredProject(projectId);
-    // 3. delete todo from project
     project.removeTodo(todoId);
-    // 4. update UI
+    // update UI
     todoEl.remove();
+    if (project.todos.length === 0) {
+      ui.renderNoTodosMessage();
+    }
   }
 
   function editTodo(el) {
@@ -82,7 +86,7 @@ export default function handlers(ui) {
     const data = storage.get(`Todo_${todoId}`);
 
     const form = document.querySelector('.js-form-add-todo');
-    // 2. populate form
+    // populate form
     Object.entries(data).forEach(([key, value]) => {
       try {
         if (key !== 'complete') {
@@ -107,11 +111,11 @@ export default function handlers(ui) {
   const todoList = document.querySelector('.js-todo-list');
   todoList.addEventListener('click', (e) => {
     const { target: el } = e;
-    if (el.matches('.js-btn-todo-delete')) {
+    if (el.closest('.js-btn-todo-delete')) {
       removeTodo(el);
-    } else if (el.matches('.js-btn-todo-edit')) {
+    } else if (el.closest('.js-btn-todo-edit')) {
       editTodo(el);
-    } else if (el.matches('.js-todo-toggle')) {
+    } else if (el.closest('.js-todo-toggle')) {
       toggleTodo(el);
     }
   });
@@ -123,6 +127,8 @@ export default function handlers(ui) {
 
     if (projectId !== pm.defaultProject) {
       projectEl.remove();
+      ui.highlightCurrentProject();
+      ui.renderProjectTodos();
     }
   }
 
@@ -130,32 +136,22 @@ export default function handlers(ui) {
     const projectId = el.closest('.js-project-item').id;
     const data = storage.get(`Project_${projectId}`);
     const form = document.querySelector('.js-form-add-project');
-    // TODO: add loop
     form.querySelector('[name="title"]').value = data.title;
     form.querySelector('[name="id"]').value = data.id;
-  }
-
-  function highlightProject(el) {
-    const list = el.closest('.js-projects-list');
-    const projectEl = el.closest('.js-project-item');
-    try {
-      list.querySelectorAll('.is-active')[0].classList.remove('is-active');
-    } catch (error) {
-      console.log(`INFO: There is no highlighted project\n`, error);
-    }
-    projectEl.classList.add('is-active');
-    pm.setCurrentProject(projectEl.id);
   }
 
   const projectsList = document.querySelector('.js-projects-list');
   projectsList.addEventListener('click', (e) => {
     const { target: el } = e;
-    if (el.matches('.js-btn-project-delete')) {
+    if (el.closest('.js-btn-project-delete')) {
       removeProject(el);
-    } else if (el.matches('.js-btn-project-edit')) {
+    } else if (el.closest('.js-btn-project-edit')) {
       editProject(el);
-    } else if (el.matches('.js-project-item-box')) {
-      highlightProject(el);
+    } else if (el.closest('.js-project-item')) {
+      const { id } = el.closest('.js-project-item');
+      pm.setCurrentProject(id);
+      ui.highlightCurrentProject();
+      ui.renderProjectTodos();
     }
   });
 }

@@ -1,3 +1,4 @@
+import { storage } from './LocStorage';
 import generateId from './utils/id';
 import trimStr from './utils/trimStr';
 
@@ -11,13 +12,21 @@ function Todo(data) {
   this.complete = complete; // TODO: not sure (complete === 'on' was here)
 }
 
+Todo.prototype.storage = storage;
+
 Todo.prototype.save = function () {
   this.storage.save(this);
 };
 
 Todo.prototype.update = function (data) {
   // TODO: assume data doesn't have undefined values
-  Object.assign(this, data);
+  const obj = data;
+
+  if ('title' in obj) {
+    obj.title = trimStr(obj.title);
+  }
+
+  Object.assign(this, obj);
   this.save();
 };
 

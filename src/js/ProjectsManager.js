@@ -1,12 +1,13 @@
+import { storage } from './LocStorage';
 import Project from './Project';
 
-function ProjectsManager() {
-  this.projects = [];
-  this.defaultProject = null;
-  this.currentProject = null;
+function ProjectsManager({ projects, defaultProject, currentProject }) {
+  this.projects = projects || [];
+  this.defaultProject = defaultProject || null;
+  this.currentProject = currentProject || null;
 }
 
-ProjectsManager.prototype.storage = null;
+ProjectsManager.prototype.storage = storage;
 
 ProjectsManager.prototype.save = function () {
   this.storage.save(this);
@@ -43,4 +44,24 @@ ProjectsManager.prototype.setCurrentProject = function (id) {
   this.save();
 };
 
+const projectsManager = (function initPM() {
+  let pm;
+
+  if (storage.isEmpty()) {
+    pm = new ProjectsManager({});
+    const defautProject = new Project({ title: 'Inbox' });
+    defautProject.save();
+    const { id } = defautProject;
+    pm.defaultProject = id;
+    pm.currentProject = id;
+    pm.addProject(id);
+  } else {
+    const data = storage.get('ProjectsManager_');
+    pm = new ProjectsManager(data);
+  }
+
+  return pm;
+})();
+
+export { projectsManager };
 export default ProjectsManager;
