@@ -16,20 +16,11 @@ I'm not sure if this is a great idea kek.
 
 Development stages: such constructors! => dumpster fire => light at the end of the tunnel.
 
-## Features
-
-- ...
-
 ## TODOs
 
 - [ ] add demo data?
 - [ ] add filter by date, priority, etc.
 - [ ] add search field
-
-- [ ] check TODOs in code
-- [ ] add content 'Features' section
-- [ ] refactor code
-- [ ] update README
 
 ## Development
 
