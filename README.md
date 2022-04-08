@@ -22,8 +22,6 @@ Development stages: such constructors! => dumpster fire => light at the end of t
 
 ## TODOs
 
-- [ ] set default value in datepicker
-- [ ] handle dates with _date-fns_
 - [ ] add demo data?
 - [ ] add filter by date, priority, etc.
 - [ ] add search field
