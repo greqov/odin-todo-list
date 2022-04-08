@@ -1,6 +1,6 @@
 export default function checkbox(label, name, id, checked) {
   return `
-    <div class="flex items-start">
+    <div class="flex items-start space-x-2">
       <div class="flex items-center h-5 pt-[3px]">
         <input
           id="${id}"
@@ -10,9 +10,7 @@ export default function checkbox(label, name, id, checked) {
           ${checked ? 'checked' : ''}
         />
       </div>
-      <div class="ml-3">
-        <label for="${id}" class="font-medium text-slate-700">${label}</label>
-      </div>
+      <label for="${id}" class="font-medium text-slate-700">${label}</label>
     </div>
   `;
 }

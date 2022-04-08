@@ -50,7 +50,7 @@ UI.prototype.renderProject = function (id) {
       mb-4 p-4 group flex justify-between items-center bg-white rounded-lg shadow-lg hover:cursor-pointer
     ">
       <span class="text-lg font-bold">${title}</span>
-      <div class="space-x-2">
+      <div class="flex items-center space-x-2">
         <button
           class="js-btn-project-edit opacity-0 text-slate-400 group-hover:opacity-100 hover:text-sky-500 transition"
           type="button"
@@ -93,28 +93,40 @@ UI.prototype.renderTodo = function (id) {
     <div id="${id}"
       class="js-todo-item mb-4 p-4 bg-white rounded-lg shadow-lg"
     >
-      <div>${title}</div>
-      <div>${dueDate}</div>
-      <div>priority: ${priority}</div>
-      <div>
-        ${checkbox('Complete?', 'complete', `check_${id}`, complete)}
-      </div>
-      <div>
-        <button
-          class="js-btn-todo-edit underline italic text-slate-400 hover:text-sky-500 transition"
-          type="button"
-          title="Edit todo"
-          data-modal-target="modal-add-todo"
-        >
-          <svg class="w-6 h-6"><use xlink:href="#icon-edit"></use></svg>
-        </button>
-        <button
-          class="js-btn-todo-delete underline italic text-slate-400 hover:text-red-500 transition"
-          type="button"
-          title="Delete todo"
-        >
-          <svg class="w-6 h-6"><use xlink:href="#icon-trash"></use></svg>
-        </button>
+      <div class="flex space-x-2">
+        <div>
+        ${checkbox('', 'complete', `check_${id}`, complete)}
+        </div>
+        <div>
+          <div class="mb-2">${title}</div>
+          <div>
+            <span class="inline-block">
+              <span class="text-slate-500 italic">priority:</span>
+              <span class="">${priority}</span><span class="text-slate-500 italic">,</span>
+            </span>
+            <span class="inline-block">
+              <span class="text-slate-500 italic">date:</span>
+              <span class="">${dueDate}</span>
+            </span>
+          </div>
+          <div class="flex items-center mt-2 space-x-2">
+            <button
+              class="js-btn-todo-edit underline italic text-slate-400 hover:text-sky-500 transition"
+              type="button"
+              title="Edit todo"
+              data-modal-target="modal-add-todo"
+            >
+              <svg class="w-6 h-6"><use xlink:href="#icon-edit"></use></svg>
+            </button>
+            <button
+              class="js-btn-todo-delete underline italic text-slate-400 hover:text-red-500 transition"
+              type="button"
+              title="Delete todo"
+            >
+              <svg class="w-6 h-6"><use xlink:href="#icon-trash"></use></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   `;
