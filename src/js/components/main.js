@@ -7,7 +7,7 @@ function main() {
 
         <div class="js-projects-list"></div>
 
-        <div class="flex justify-end space-x-2">
+        <div class="flex justify-end space-x-2 lg:justify-start">
           <button
             class="inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition select-none"
             type="button"
@@ -21,7 +21,7 @@ function main() {
         <h2 class="my-4 text-3xl font-bold">Todos</h2>
         <div class="js-todo-list"></div>
 
-        <div class="flex justify-end space-x-2">
+        <div class="flex justify-end space-x-2 lg:justify-start">
           <button
             class="js-btn-add-todo inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition select-none"
             type="button"

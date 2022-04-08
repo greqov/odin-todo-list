@@ -1,5 +1,5 @@
 const id = 'modal-add-project';
-const title = 'Add el projecto';
+const title = 'Add/edit project';
 
 const form = `
   <form class="js-form-add-project" id="addProjectForm" action="#">
@@ -33,7 +33,7 @@ const actions = `
     form="addProjectForm"
     data-modal-closer
   >
-    Add project
+    Submit
   </button>
 `;
 

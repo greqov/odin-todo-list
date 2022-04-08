@@ -1,5 +1,5 @@
 const id = `modal-add-todo`;
-const title = `Add el todo amigo!`;
+const title = `Add/edit todo`;
 
 const form = `
   <form class="js-form-add-todo space-y-4" id="addTodoForm" action="#">
@@ -70,7 +70,7 @@ const actions = `
     form="addTodoForm"
     data-modal-closer
   >
-    Add/Update todo
+    Submit
   </button>
 `;
 
