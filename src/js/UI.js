@@ -27,6 +27,12 @@ UI.prototype.init = function () {
   );
 
   document.body.insertAdjacentHTML('beforeend', layout);
+
+  projectsManager.projects.forEach((id) => {
+    this.renderProject(id);
+  });
+  this.renderProjectTodos();
+
   new Modal().init();
   this.addHandlers();
 };
