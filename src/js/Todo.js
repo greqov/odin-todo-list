@@ -21,8 +21,12 @@ Todo.prototype.save = function () {
 Todo.prototype.update = function (data) {
   // TODO: assume data doesn't have undefined values
   const obj = data;
-  obj.title = trimStr(obj.title);
-  Object.assign(this, data);
+
+  if ('title' in obj) {
+    obj.title = trimStr(obj.title);
+  }
+
+  Object.assign(this, obj);
   this.save();
 };
 
