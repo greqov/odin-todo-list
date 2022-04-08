@@ -1,8 +1,5 @@
 import { projectsManager } from './ProjectsManager';
 import { ui } from './UI';
-import demoTodosData from './data/demoTodos.json';
-import archiveTodosData from './data/archiveTodos.json';
-
 import '../css/styles.css';
 
 ui.init();
