@@ -52,7 +52,9 @@ Project.prototype.moveTodo = function (todo, project) {
 };
 
 Project.prototype.update = function (data) {
-  Object.assign(this, data);
+  const obj = data;
+  obj.title = trimStr(obj.title);
+  Object.assign(this, obj);
   this.save();
 };
 
