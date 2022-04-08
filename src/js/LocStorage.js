@@ -25,8 +25,6 @@ LocStorage.prototype.isEmpty = function () {
   return localStorage.length === 0;
 };
 
-// TODO: is it better to save manager, projects, todos separately?
-
 const storage = new LocStorage();
 
 export default LocStorage;

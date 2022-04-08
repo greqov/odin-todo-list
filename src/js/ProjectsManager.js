@@ -55,7 +55,6 @@ const projectsManager = (function initPM() {
     pm.defaultProject = id;
     pm.currentProject = id;
     pm.addProject(id);
-    // defautProject.loadData(demoTodosData);
   } else {
     const data = storage.get('ProjectsManager_');
     pm = new ProjectsManager(data);

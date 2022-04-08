@@ -50,7 +50,6 @@ function replaceOldItem(container, id, template) {
 UI.prototype.renderProject = function (id) {
   const container = document.querySelector('.js-projects-list');
   const { title } = this.storage.get(`Project_${id}`);
-  // TODO: get id, title
   const template = `
     <div id="${id}" class="js-project-item ${id === this.pm.currentProject ? 'text-orange-600' : ''}
       mb-4 p-4 group flex justify-between items-center bg-white rounded-lg shadow-lg hover:cursor-pointer

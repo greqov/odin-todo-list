@@ -17,7 +17,6 @@ const form = `
     </label>
   </form>
 `;
-// TODO: enable autofocus
 
 const actions = `
   <button

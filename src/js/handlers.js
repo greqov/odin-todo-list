@@ -70,14 +70,11 @@ export default function handlers(ui) {
 
   function removeTodo(el) {
     const todoEl = el.closest('.js-todo-item');
-    // 1. get todo id
     const todoId = todoEl.id;
-    // 2. get project (hint: current project)
     const projectId = pm.currentProject;
     const project = pm.getRestoredProject(projectId);
-    // 3. delete todo from project
     project.removeTodo(todoId);
-    // 4. update UI
+    // update UI
     todoEl.remove();
     if (project.todos.length === 0) {
       ui.renderNoTodosMessage();
@@ -89,7 +86,7 @@ export default function handlers(ui) {
     const data = storage.get(`Todo_${todoId}`);
 
     const form = document.querySelector('.js-form-add-todo');
-    // 2. populate form
+    // populate form
     Object.entries(data).forEach(([key, value]) => {
       try {
         if (key !== 'complete') {
@@ -136,11 +133,9 @@ export default function handlers(ui) {
   }
 
   function editProject(el) {
-    // TODO: add check for empty title on edit action
     const projectId = el.closest('.js-project-item').id;
     const data = storage.get(`Project_${projectId}`);
     const form = document.querySelector('.js-form-add-project');
-    // TODO: add loop
     form.querySelector('[name="title"]').value = data.title;
     form.querySelector('[name="id"]').value = data.id;
   }
