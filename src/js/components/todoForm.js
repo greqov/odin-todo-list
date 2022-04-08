@@ -15,6 +15,7 @@ const form = `
         name="title"
         placeholder="Title"
         autofocus
+        autocomplete="off"
       />
     </label>
 

@@ -13,6 +13,7 @@ const form = `
         name="title"
         placeholder="Project title"
         autofocus
+        autocomplete="off"
       />
     </label>
   </form>
