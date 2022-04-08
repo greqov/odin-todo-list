@@ -132,7 +132,7 @@ UI.prototype.removeNoTodosMessage = function () {
 };
 
 UI.prototype.renderNoTodosMessage = function () {
-  const message = `<p class="js-no-todos-message mb-4">Wow! Such empty! <span class="underline italic cursor-pointer" data-modal-target="modal-add-todo">Add first todo?</span></p>`;
+  const message = `<p class="js-no-todos-message mb-4">Wow! Such empty! <span class="underline italic cursor-pointer hover:text-orange-500 transition" data-modal-target="modal-add-todo">Add first todo?</span></p>`;
   document.querySelector(
     '.js-todo-list'
   ).innerHTML = `<div class="js-no-todos-message">${message}</div>`;
